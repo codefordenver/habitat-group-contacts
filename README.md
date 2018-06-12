@@ -1,8 +1,13 @@
 ## habitat-group-contacts
 
-### Starting React Server
+### Installing required packages
 
 Navigate to the /client
+
+Run ```npm install```
+
+
+### Starting React Server
 
 Run ```npm run start ```
 
