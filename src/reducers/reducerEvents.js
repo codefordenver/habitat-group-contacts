@@ -1,13 +1,10 @@
-import { FETCH_EVENTS } from "../actions/fetchEvents";
+import _ from 'lodash';
+import { FETCH_EVENTS } from '../actions/fetchEvents';
 
-export default function(state = [], action) {
+export default function(state = {}, action) {
   switch (action.type) {
     case FETCH_EVENTS:
-      console.log("Fetched Events in reducer_events.js");
-      console.log("API Request ", action.payload);
-      return Object.assign({}, state, {
-        events: action.payload.data
-      });
+      return _.mapKeys(action.payload.data, 'EventUid');
     default:
       return state;
   }

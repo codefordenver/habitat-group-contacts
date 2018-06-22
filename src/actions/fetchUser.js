@@ -1,12 +1,10 @@
-import axios from "axios";
+import axios from 'axios';
 
-export const FETCH_USER = "FETCH_USER";
+export const FETCH_USER = 'FETCH_USER';
 
 export function fetchUser() {
-  console.log("Fetching user in fetchUser action");
-
   const url =
-    "https://denver.volunteerhub.com/api/v1/events?query=Time&earliestTime=2018-06-14T01:00:00";
+    'https://denver.volunteerhub.com/api/v1/events?query=Time&earliestTime=2018-06-14T01:00:00';
 
   const request = axios.get(url, {
     auth: {
