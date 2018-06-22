@@ -4,8 +4,7 @@ export const FETCH_EVENTS = "FETCH_EVENTS";
 
 export function fetchEvents() {
   console.log("Attempting to query API in fetchEvents.js");
-  const url =
-    "https://denver.volunteerhub.com/api/v1/events?query=Time&earliestTime=2018-06-14T01:00:00";
+  const url = "/api/v1/events?query=Time&earliestTime=2018-06-14T01:00:00";
 
   const request = axios.get(url, {
     auth: {
@@ -15,7 +14,7 @@ export function fetchEvents() {
   });
 
   return {
-    type: "FETCH_EVENTS",
+    type: FETCH_EVENTS,
     payload: request
   };
 }

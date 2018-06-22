@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import EventList from "./components/EventList";
+import Event from "./containers/Event";
 
 class App extends Component {
   render() {
@@ -13,6 +14,8 @@ class App extends Component {
         </p>
 
         <EventList />
+
+        <Event />
       </div>
     );
   }

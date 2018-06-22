@@ -1,10 +1,10 @@
-import { FETCH_EVENTS } from "../actions/fetchEvents";
+import { FETCH_USER } from "../actions/fetchUser";
 
 export default function(state = [], action) {
   switch (action.type) {
-    case FETCH_EVENTS:
+    case FETCH_USER:
       console.log("Fetched Events in reducer_events.js");
-      return [action.payload, ...state];
+      return [action.payload.data, ...state];
     default:
       return state;
   }

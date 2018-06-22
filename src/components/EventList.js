@@ -1,17 +1,29 @@
 import React, { Component } from "react";
+import EventCard from "../containers/Event";
 import { connect } from "react-redux";
 import { fetchEvents } from "../actions/fetchEvents";
 import { bindActionCreators } from "redux";
+import _ from "lodash";
 
 class EventList extends Component {
+  componentWillMount() {
+    this.props.fetchEvents();
+  }
+
   render() {
+    console.log("Current props: ", this.props.events);
     return (
       <div>
-        {console.log(fetchEvents())}
-        This is the EventList component
+        {this.props.events
+          ? _.map(this.props.events, event => <EventCard event={event} />)
+          : "Loading"}
       </div>
     );
   }
+}
+
+function mapStateToProps(state) {
+  return { events: state.events };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -19,6 +31,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(EventList);
