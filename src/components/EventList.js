@@ -2,21 +2,26 @@ import React, { Component } from 'react';
 import EventCard from '../containers/Event';
 import { connect } from 'react-redux';
 import { fetchEvents } from '../actions/fetchEvents';
+import { fetchUserGroups } from '../actions/fetchUserGroups';
 import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 
 class EventList extends Component {
   componentWillMount() {
     this.props.fetchEvents();
+    this.props.fetchUserGroups();
   }
 
   render() {
-    console.log('Current props: ', this.props.events);
     return (
       <div>
         {this.props.events
           ? _.map(this.props.events, event => (
-              <EventCard key={event.EventUid} event={event} />
+              <EventCard
+                key={event.EventUid}
+                event={event}
+                userGroups={this.props.userGroups}
+              />
             ))
           : 'Waiting for Events'}
       </div>
@@ -25,11 +30,14 @@ class EventList extends Component {
 }
 
 function mapStateToProps(state) {
-  return { events: state.events };
+  return {
+    events: state.events,
+    userGroups: state.userGroups
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchEvents }, dispatch);
+  return bindActionCreators({ fetchEvents, fetchUserGroups }, dispatch);
 }
 
 export default connect(

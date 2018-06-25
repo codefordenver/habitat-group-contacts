@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const FETCH_USER = 'FETCH_USER';
+export const FETCH_USERGROUP = 'FETCH_USERGROUP';
 
-export function fetchUser(id) {
-  const url = `/api/v2/users/${id}`;
+export function fetchUserGroups() {
+  const url = `/api/v1/usergroups`;
 
   const request = axios.get(url, {
     auth: {
@@ -13,7 +13,7 @@ export function fetchUser(id) {
   });
 
   return {
-    type: FETCH_USER,
+    type: FETCH_USERGROUP,
     payload: request
   };
 }
