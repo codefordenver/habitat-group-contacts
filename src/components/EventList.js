@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import EventCard from '../containers/Event';
-import { connect } from 'react-redux';
-import { fetchEvents } from '../actions/fetchEvents';
-import { fetchUserGroups } from '../actions/fetchUserGroups';
-import { bindActionCreators } from 'redux';
-import _ from 'lodash';
+import React, { Component } from "react";
+import EventCard from "../containers/Event";
+import { connect } from "react-redux";
+import { fetchEvents } from "../actions/fetchEvents";
+import { fetchUserGroups } from "../actions/fetchUserGroups";
+import { bindActionCreators } from "redux";
+import _ from "lodash";
 
 class EventList extends Component {
   componentWillMount() {
@@ -14,7 +14,7 @@ class EventList extends Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         {this.props.events
           ? _.map(this.props.events, event => (
               <EventCard
@@ -23,8 +23,8 @@ class EventList extends Component {
                 userGroups={this.props.userGroups}
               />
             ))
-          : 'Waiting for Events'}
-      </div>
+          : "Waiting for Events"}
+      </React.Fragment>
     );
   }
 }

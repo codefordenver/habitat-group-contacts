@@ -1,12 +1,16 @@
-import { FETCH_USER } from '../actions/fetchUser';
+import { FETCH_USER } from "../actions/fetchUser";
 
 export default function(state = {}, action) {
   switch (action.type) {
     case FETCH_USER:
-      return {
-        ...state,
-        [action.payload.data.UserUid]: action.payload.data.FormAnswers
-      };
+      if (action.payload.data) {
+        return {
+          ...state,
+          [action.payload.data.UserUid]: action.payload.data.FormAnswers
+        };
+      } else {
+        return state;
+      }
 
     default:
       return state;

@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchUser } from '../actions/fetchUser';
-import { bindActionCreators } from 'redux';
-import _ from 'lodash';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchUser } from "../actions/fetchUser";
+import { bindActionCreators } from "redux";
 
 class UserList extends Component {
   componentWillMount() {
@@ -20,7 +19,7 @@ class UserList extends Component {
             <div>Email: {this.props.user[6].Value}</div>
           </div>
         ) : (
-          'Waiting for User'
+          "Waiting for User"
         )}
       </div>
     );
