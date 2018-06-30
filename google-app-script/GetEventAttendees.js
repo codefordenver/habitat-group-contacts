@@ -1,4 +1,5 @@
-function getEventJSON(eventName) {
+function getEventAttendees(eventName) {
+  SpreadsheetApp.flush();
   var username = PropertiesService.getScriptProperties().getProperty("VH_Username");
   var password = PropertiesService.getScriptProperties().getProperty("VH_Password");
   
