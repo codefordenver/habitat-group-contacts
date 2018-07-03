@@ -1,5 +1,6 @@
 ## habitat-group-contacts
 
+
 [![Stories Ready to Work On](https://badge.waffle.io/codefordenver/habitat-group-contacts.svg?label=ready&title=Cards%20Ready%20To%20Work%20On)](https://waffle.io/codefordenver/habitat-group-contacts)
 
 ### Starting React Server
@@ -12,7 +13,7 @@ Add the VolunteerHub username and password to the `.env` which is used to access
 
 #### Run React Server
 
-Run `npm run start`
+Navigate to the `client` folder and run `npm run start`
 
 React server will start on `http://localhost:3000/`
 
