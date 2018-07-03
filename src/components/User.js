@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchUser } from '../actions/fetchUser';
-import { bindActionCreators } from 'redux';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import UserDetail from '../containers/UserDetail';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchUser } from "../actions/fetchUser";
+import { bindActionCreators } from "redux";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import UserDetail from "../containers/UserDetail";
 
 class UserList extends Component {
   componentWillMount() {

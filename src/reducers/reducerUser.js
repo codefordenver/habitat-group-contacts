@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { FETCH_USER } from "../actions/fetchUser";
 
 export default function(state = {}, action) {
@@ -6,7 +7,10 @@ export default function(state = {}, action) {
       if (action.payload.data) {
         return {
           ...state,
-          [action.payload.data.UserUid]: action.payload.data.FormAnswers
+          [action.payload.data.UserUid]: _.mapKeys(
+            action.payload.data.FormAnswers,
+            "FormQuestionUid"
+          )
         };
       } else {
         return state;
