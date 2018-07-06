@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import _ from "lodash";
-import User from "./User";
-import { connect } from "react-redux";
-import { fetchEvents } from "../actions/fetchEvents";
-import { fetchUserGroups } from "../actions/fetchUserGroups";
-import { bindActionCreators } from "redux";
-import UserDetailHeader from "../containers/UserDetailHeader";
-import UserGroupDetails from "../containers/UserGroupDetails";
+import React, { Component } from 'react';
+import _ from 'lodash';
+import User from './User';
+import { connect } from 'react-redux';
+import { fetchEvents } from '../actions/fetchEvents';
+import { fetchUserGroups } from '../actions/fetchUserGroups';
+import { bindActionCreators } from 'redux';
+import UserDetailHeader from '../containers/UserDetailHeader';
+import UserGroupDetails from '../containers/UserGroupDetails';
 
 class UserGroup extends Component {
   componentWillMount() {
@@ -19,18 +19,17 @@ class UserGroup extends Component {
     const { userGroups } = this.props;
     const { usergroupid } = this.props.match.params;
 
-    const findUserGroup = (event, usergroupid) => {
-      return event
-        ? _.mapKeys(event.UserGroupRegistrations, "UserGroupUid")[usergroupid]
-        : null;
-    };
+    const eventName = event ? event.Name : null;
+    const eventStart = event ? event.StartTime : null;
+    const eventEnd = event ? event.EndTime : null;
 
-    const getUserGroupName = (userGroups, usergroupid) => {
-      return userGroups[usergroupid] ? userGroups[usergroupid].Name : null;
-    };
+    const userGroup = event
+      ? _.mapKeys(event.UserGroupRegistrations, 'UserGroupUid')[usergroupid]
+      : null;
 
-    const userGroup = findUserGroup(event, usergroupid);
-    const userGroupName = getUserGroupName(userGroups, usergroupid);
+    const userGroupName = userGroups[usergroupid]
+      ? userGroups[usergroupid].Name
+      : null;
 
     const loadUsers = userGroup => {
       return (
@@ -41,14 +40,19 @@ class UserGroup extends Component {
                   <User lookupUser={user} deleted={user.Deleted} />
                 </div>
               ))
-            : ""}
+            : ''}
         </div>
       );
     };
 
     return (
       <div>
-        <UserGroupDetails name={userGroupName} />
+        <UserGroupDetails
+          eventName={eventName}
+          userGroupName={userGroupName}
+          startTime={eventStart}
+          endTime={eventEnd}
+        />
         <UserDetailHeader />
         {loadUsers(userGroup)}
       </div>

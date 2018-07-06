@@ -1,18 +1,18 @@
-import React from "react";
-import _ from "lodash";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
-import moment from "moment";
+import React from 'react';
+import _ from 'lodash';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
+import dateFormat from './dateFormat';
 
 const divStyle = {
-  padding: "5px",
-  margin: "5px"
+  padding: '5px',
+  margin: '5px'
 };
 
 const buttonStyle = {
-  marginLeft: "15px"
+  marginLeft: '15px'
 };
 
 const checkUserGroup = (event, group, userGroup) => {
@@ -32,7 +32,7 @@ const checkUserGroup = (event, group, userGroup) => {
             color="primary"
             component={Link}
             style={buttonStyle}
-            to={event.EventUid + "/" + userGroupUid}
+            to={event.EventUid + '/' + userGroupUid}
           >
             View Users
           </Button>
@@ -44,21 +44,6 @@ const checkUserGroup = (event, group, userGroup) => {
   return null;
 };
 
-const dateFormat = (date, type) => {
-  var d = new Date(date);
-
-  switch (type) {
-    case "start":
-      return moment(d).format("MMMM Do YYYY, h:mm:ss a");
-
-    case "end":
-      return moment(d).format("h:mm:ss a");
-
-    default:
-      return null;
-  }
-};
-
 const loadEvent = (event, userGroup) => {
   return (
     <div>
@@ -66,13 +51,13 @@ const loadEvent = (event, userGroup) => {
         <Typography variant="title">{event.Name}</Typography>
 
         <Typography variant="subheading">
-          {dateFormat(event.StartTime, "start")} {" - "}
-          {dateFormat(event.EndTime, "end")}
+          {dateFormat(event.StartTime, 'start')} {' - '}
+          {dateFormat(event.EndTime, 'end')}
         </Typography>
 
         <Typography variant="caption">
           {/* Removing <p> tags https://stackoverflow.com/questions/822452/strip-html-from-text-javascript */}
-          {event.LongDescription.replace(/<(?:.|\n)*?>/gm, "")}
+          {event.LongDescription.replace(/<(?:.|\n)*?>/gm, '')}
         </Typography>
 
         <div style={divStyle} />
