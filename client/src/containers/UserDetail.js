@@ -1,8 +1,12 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import CheckIcon from "@material-ui/icons/Check";
+import CloseIcon from "@material-ui/icons/Close";
 
 const UserDetail = props => {
   const { user } = props;
+  const { deleted } = props;
 
   const FIRST_NAME_UID = "01a07da8-05cc-45af-8e59-f8742cb7fa8e";
   const LAST_NAME_UID = "01a07da8-05cc-45af-8e59-f8742cb7fa8e";
@@ -14,16 +18,34 @@ const UserDetail = props => {
   const Phone = user[PHONE_UID].Value;
   const Email = user[EMAIL_UID].Value;
 
+  const attending = deleted => {
+    switch (deleted) {
+      case true:
+        return <CloseIcon />;
+
+      case false:
+        return <CheckIcon />;
+
+      default:
+        return null;
+    }
+  };
+
   return (
-    <Grid container>
-      <Grid item xs={12} md={4}>
-        {FirstName} {LastName}
+    <Grid container justify="center">
+      <Grid item style={{ textAlign: "center" }} xs={2} sm={2}>
+        {attending(deleted)}
       </Grid>
-      <Grid item xs={12} md={4}>
-        {Phone}
+      <Grid item xs={10} sm={3}>
+        <Typography>
+          {FirstName} {LastName}{" "}
+        </Typography>
       </Grid>
-      <Grid item xs={12} md={4}>
-        {Email}
+      <Grid item xs={12} sm={3}>
+        <Typography>{Phone} </Typography>
+      </Grid>
+      <Grid item xs={12} sm={3}>
+        <Typography>{Email} </Typography>
       </Grid>
     </Grid>
   );

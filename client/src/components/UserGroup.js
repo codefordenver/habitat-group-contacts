@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
-import _ from 'lodash';
-import User from './User';
-import { connect } from 'react-redux';
-import { fetchEvents } from '../actions/fetchEvents';
-import { fetchUserGroups } from '../actions/fetchUserGroups';
-import { bindActionCreators } from 'redux';
-import UserDetailHeader from '../containers/UserDetailHeader';
+import React, { Component } from "react";
+import _ from "lodash";
+import User from "./User";
+import { connect } from "react-redux";
+import { fetchEvents } from "../actions/fetchEvents";
+import { fetchUserGroups } from "../actions/fetchUserGroups";
+import { bindActionCreators } from "redux";
+import UserDetailHeader from "../containers/UserDetailHeader";
+import UserGroupDetails from "../containers/UserGroupDetails";
 
 class UserGroup extends Component {
   componentWillMount() {
@@ -15,15 +16,21 @@ class UserGroup extends Component {
 
   render() {
     const { event } = this.props;
+    const { userGroups } = this.props;
     const { usergroupid } = this.props.match.params;
 
     const findUserGroup = (event, usergroupid) => {
       return event
-        ? _.mapKeys(event.UserGroupRegistrations, 'UserGroupUid')[usergroupid]
+        ? _.mapKeys(event.UserGroupRegistrations, "UserGroupUid")[usergroupid]
         : null;
     };
 
+    const getUserGroupName = (userGroups, usergroupid) => {
+      return userGroups[usergroupid] ? userGroups[usergroupid].Name : null;
+    };
+
     const userGroup = findUserGroup(event, usergroupid);
+    const userGroupName = getUserGroupName(userGroups, usergroupid);
 
     const loadUsers = userGroup => {
       return (
@@ -31,17 +38,17 @@ class UserGroup extends Component {
           {userGroup
             ? _.map(userGroup.UserRegistrations, user => (
                 <div key={user.UserUid}>
-                  <User lookupUser={user} />
+                  <User lookupUser={user} deleted={user.Deleted} />
                 </div>
               ))
-            : ''}
+            : ""}
         </div>
       );
     };
 
     return (
       <div>
-        <h1> Users </h1>
+        <UserGroupDetails name={userGroupName} />
         <UserDetailHeader />
         {loadUsers(userGroup)}
       </div>

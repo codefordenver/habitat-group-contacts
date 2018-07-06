@@ -2,38 +2,41 @@ import React from "react";
 import _ from "lodash";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-const paperStyle = {
-  padding: "10px",
-  margin: "10px"
+const divStyle = {
+  padding: "5px",
+  margin: "5px"
 };
 
 const buttonStyle = {
-  margin: "10px"
+  marginLeft: "15px"
 };
 
-const checkUserGroup = (event, UserGroupUid, userGroup) => {
-  const userGroupDetail = userGroup[UserGroupUid];
+const checkUserGroup = (event, group, userGroup) => {
+  const userGroupUid = group.UserGroupUid;
+  const userGroupDetail = userGroup[userGroupUid];
 
   if (userGroupDetail) {
     return (
-      <div key={UserGroupUid}>
+      <div key={userGroupUid} style={divStyle}>
         {/* Why is UserGroupUid for first group exist without name or users? */}
-        <Paper style={paperStyle}>
-          {userGroupDetail ? userGroupDetail.Name : ""}
+        <Typography>
+          {userGroupDetail.Name}
 
           <Button
             variant="contained"
+            size="small"
             color="primary"
-            style={buttonStyle}
             component={Link}
-            to={event.EventUid + "/" + UserGroupUid}
+            style={buttonStyle}
+            to={event.EventUid + "/" + userGroupUid}
           >
             View Users
           </Button>
-        </Paper>
+        </Typography>
       </div>
     );
   }
@@ -59,18 +62,23 @@ const dateFormat = (date, type) => {
 const loadEvent = (event, userGroup) => {
   return (
     <div>
-      <Paper style={paperStyle}>
-        {console.log(event)}
-        <h1> Event Name: {event.Name} </h1>
-        <h1>
-          Event Time: {dateFormat(event.StartTime, "start")} {" - "}
+      <Paper style={divStyle}>
+        <Typography variant="title">{event.Name}</Typography>
+
+        <Typography variant="subheading">
+          {dateFormat(event.StartTime, "start")} {" - "}
           {dateFormat(event.EndTime, "end")}
-        </h1>
-        <h2> Event Description: {event.LongDescription} </h2>
-        <h3> User Groups: </h3>
+        </Typography>
+
+        <Typography variant="caption">
+          {/* Removing <p> tags https://stackoverflow.com/questions/822452/strip-html-from-text-javascript */}
+          {event.LongDescription.replace(/<(?:.|\n)*?>/gm, "")}
+        </Typography>
+
+        <div style={divStyle} />
 
         {_.map(event.UserGroupRegistrations, group =>
-          checkUserGroup(event, group.UserGroupUid, userGroup)
+          checkUserGroup(event, group, userGroup)
         )}
       </Paper>
     </div>
