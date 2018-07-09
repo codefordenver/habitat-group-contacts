@@ -8,7 +8,7 @@ import dateFormat from './dateFormat';
 
 const divStyle = {
   padding: '5px',
-  margin: '5px'
+  margin: '10px 0 10px 0'
 };
 
 const buttonStyle = {

@@ -19,6 +19,10 @@ class UserGroup extends Component {
     const { userGroups } = this.props;
     const { usergroupid } = this.props.match.params;
 
+    const paddingStyle = {
+      padding: '0 24px 0 24px'
+    };
+
     const eventName = event ? event.Name : null;
     const eventStart = event ? event.StartTime : null;
     const eventEnd = event ? event.EndTime : null;
@@ -35,9 +39,12 @@ class UserGroup extends Component {
       return (
         <div>
           {userGroup
-            ? _.map(userGroup.UserRegistrations, user => (
-                <div key={user.UserUid}>
-                  <User lookupUser={user} deleted={user.Deleted} />
+            ? _.map(userGroup.UserRegistrations, registeredUser => (
+                <div key={registeredUser.UserUid}>
+                  <User
+                    lookupUser={registeredUser}
+                    deleted={registeredUser.Deleted}
+                  />
                 </div>
               ))
             : ''}
@@ -53,8 +60,10 @@ class UserGroup extends Component {
           startTime={eventStart}
           endTime={eventEnd}
         />
-        <UserDetailHeader />
-        {loadUsers(userGroup)}
+        <div style={paddingStyle}>
+          <UserDetailHeader />
+          {loadUsers(userGroup)}
+        </div>
       </div>
     );
   }

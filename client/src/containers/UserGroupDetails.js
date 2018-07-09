@@ -1,7 +1,8 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
-import dateFormat from './dateFormat';
 import Divider from '@material-ui/core/Divider';
+import dateFormat from './dateFormat';
+import AppBar from './AppBar';
 
 const UserGroupDetails = props => {
   const eventTime =
@@ -9,23 +10,27 @@ const UserGroupDetails = props => {
     ' - ' +
     dateFormat(props.endTime, 'end');
 
+  const paddingStyle = {
+    padding: '0 24px 0 24px'
+  };
+
   return (
     <React.Fragment>
-      <Typography variant="headline">Event: {props.eventName}</Typography>
-
-      <Typography variant="subheading">{eventTime}</Typography>
+      <AppBar title={'User Group: ' + props.userGroupName} />
 
       <div style={{ margin: '10px' }} />
 
-      <Typography variant="headline">
-        User List For: {props.userGroupName}
-      </Typography>
+      <div style={paddingStyle}>
+        <Typography variant="headline">Event: {props.eventName}</Typography>
 
-      <div style={{ margin: '10px' }} />
+        <Typography variant="subheading">{eventTime}</Typography>
 
-      <Divider />
+        <div style={{ margin: '10px' }} />
 
-      <div style={{ margin: '10px' }} />
+        <Divider />
+
+        <div style={{ margin: '10px' }} />
+      </div>
     </React.Fragment>
   );
 };
