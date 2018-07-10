@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import _ from 'lodash';
-import User from './User';
-import { connect } from 'react-redux';
-import { fetchEvents } from '../actions/fetchEvents';
-import { fetchUserGroups } from '../actions/fetchUserGroups';
-import { bindActionCreators } from 'redux';
-import UserDetailHeader from '../containers/UserDetailHeader';
-import UserGroupDetails from '../containers/UserGroupDetails';
+import React, { Component } from "react";
+import _ from "lodash";
+import User from "./User";
+import { connect } from "react-redux";
+import { fetchEvents } from "../actions/fetchEvents";
+import { fetchUserGroups } from "../actions/fetchUserGroups";
+import { bindActionCreators } from "redux";
+import UserDetailHeader from "../containers/UserDetailHeader";
+import UserGroupDetails from "../containers/UserGroupDetails";
 
 class UserGroup extends Component {
   componentWillMount() {
@@ -20,7 +20,7 @@ class UserGroup extends Component {
     const { usergroupid } = this.props.match.params;
 
     const paddingStyle = {
-      padding: '0 24px 0 24px'
+      padding: "0 24px 0 24px"
     };
 
     const eventName = event ? event.Name : null;
@@ -28,7 +28,7 @@ class UserGroup extends Component {
     const eventEnd = event ? event.EndTime : null;
 
     const userGroup = event
-      ? _.mapKeys(event.UserGroupRegistrations, 'UserGroupUid')[usergroupid]
+      ? _.mapKeys(event.UserGroupRegistrations, "UserGroupUid")[usergroupid]
       : null;
 
     const userGroupName = userGroups[usergroupid]
@@ -47,7 +47,7 @@ class UserGroup extends Component {
                   />
                 </div>
               ))
-            : ''}
+            : ""}
         </div>
       );
     };
