@@ -6,6 +6,7 @@ import { fetchEvents } from '../actions/fetchEvents';
 import { fetchUserGroups } from '../actions/fetchUserGroups';
 import { bindActionCreators } from 'redux';
 import UserDetailHeader from '../containers/UserDetailHeader';
+import UserGroupDetails from '../containers/UserGroupDetails';
 
 class UserGroup extends Component {
   componentWillMount() {
@@ -15,15 +16,20 @@ class UserGroup extends Component {
 
   render() {
     const { event } = this.props;
+    const { userGroups } = this.props;
     const { usergroupid } = this.props.match.params;
 
-    const findUserGroup = (event, usergroupid) => {
-      return event
-        ? _.mapKeys(event.UserGroupRegistrations, 'UserGroupUid')[usergroupid]
-        : null;
-    };
+    const eventName = event ? event.Name : null;
+    const eventStart = event ? event.StartTime : null;
+    const eventEnd = event ? event.EndTime : null;
 
-    const userGroup = findUserGroup(event, usergroupid);
+    const userGroup = event
+      ? _.mapKeys(event.UserGroupRegistrations, 'UserGroupUid')[usergroupid]
+      : null;
+
+    const userGroupName = userGroups[usergroupid]
+      ? userGroups[usergroupid].Name
+      : null;
 
     const loadUsers = userGroup => {
       return (
@@ -31,7 +37,7 @@ class UserGroup extends Component {
           {userGroup
             ? _.map(userGroup.UserRegistrations, user => (
                 <div key={user.UserUid}>
-                  <User lookupUser={user} />
+                  <User lookupUser={user} deleted={user.Deleted} />
                 </div>
               ))
             : ''}
@@ -41,7 +47,12 @@ class UserGroup extends Component {
 
     return (
       <div>
-        <h1> Users </h1>
+        <UserGroupDetails
+          eventName={eventName}
+          userGroupName={userGroupName}
+          startTime={eventStart}
+          endTime={eventEnd}
+        />
         <UserDetailHeader />
         {loadUsers(userGroup)}
       </div>

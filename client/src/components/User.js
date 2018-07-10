@@ -12,11 +12,12 @@ class UserList extends Component {
 
   render() {
     const { user } = this.props;
+    const { deleted } = this.props;
     return (
       <div>
         {user ? (
           <div>
-            <UserDetail user={user} />
+            <UserDetail user={user} deleted={deleted} />
           </div>
         ) : (
           <LinearProgress />
