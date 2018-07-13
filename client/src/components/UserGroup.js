@@ -7,11 +7,16 @@ import { fetchUserGroups } from "../actions/fetchUserGroups";
 import { bindActionCreators } from "redux";
 import UserDetailHeader from "../containers/UserDetailHeader";
 import UserGroupDetails from "../containers/UserGroupDetails";
+import DownloadExcel from "./DownloadExcel";
 
 class UserGroup extends Component {
   componentWillMount() {
     this.props.fetchEvents();
-    this.props.fetchUserGroups();
+
+    var i = 0;
+    for (i = 0; i < 30; i++) {
+      this.props.fetchUserGroups(i);
+    }
   }
 
   render() {
@@ -31,15 +36,13 @@ class UserGroup extends Component {
       ? _.mapKeys(event.UserGroupRegistrations, "UserGroupUid")[usergroupid]
       : null;
 
-    const userGroupName = userGroups[usergroupid]
-      ? userGroups[usergroupid].Name
-      : null;
+    const userGroupName = userGroups ? userGroups.Name : null;
 
-    const loadUsers = userGroup => {
+    const loadUsers = group => {
       return (
         <div>
-          {userGroup
-            ? _.map(userGroup.UserRegistrations, registeredUser => (
+          {group
+            ? _.map(group.UserRegistrations, registeredUser => (
                 <div key={registeredUser.UserUid}>
                   <User
                     lookupUser={registeredUser}
@@ -64,6 +67,7 @@ class UserGroup extends Component {
           <UserDetailHeader />
           {loadUsers(userGroup)}
         </div>
+        <DownloadExcel />
       </div>
     );
   }
@@ -72,7 +76,7 @@ class UserGroup extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     event: state.events[ownProps.match.params.event],
-    userGroups: state.userGroups
+    userGroups: state.userGroups[ownProps.match.params.usergroupid]
   };
 }
 

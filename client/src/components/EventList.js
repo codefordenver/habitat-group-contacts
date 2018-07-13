@@ -1,17 +1,20 @@
-import React, { Component } from 'react';
-import EventCard from '../containers/Event';
-import { connect } from 'react-redux';
-import { fetchEvents } from '../actions/fetchEvents';
-import { fetchUserGroups } from '../actions/fetchUserGroups';
-import { bindActionCreators } from 'redux';
-import _ from 'lodash';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import AppBar from '../containers/AppBar';
+import React, { Component } from "react";
+import EventCard from "../containers/Event";
+import { connect } from "react-redux";
+import { fetchEvents } from "../actions/fetchEvents";
+import { fetchUserGroups } from "../actions/fetchUserGroups";
+import { bindActionCreators } from "redux";
+import _ from "lodash";
+import LinearProgress from "@material-ui/core/LinearProgress";
+import AppBar from "../containers/AppBar";
 
 class EventList extends Component {
   componentWillMount() {
     this.props.fetchEvents();
-    this.props.fetchUserGroups();
+    var i = 0;
+    for (i = 0; i < 30; i++) {
+      this.props.fetchUserGroups(i);
+    }
   }
 
   render() {

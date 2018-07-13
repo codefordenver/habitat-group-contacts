@@ -3,7 +3,7 @@ import axios from "axios";
 export const FETCH_USERGROUP = "FETCH_USERGROUP";
 
 export function fetchUserGroups(page) {
-  const url = `/api/v1/usergroups?${page}&pageSize=50`;
+  const url = `/api/v1/usergroups?page=${page}&pageSize=50`;
 
   const request = axios.get(url, {
     auth: {

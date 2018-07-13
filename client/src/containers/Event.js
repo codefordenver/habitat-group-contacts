@@ -1,42 +1,57 @@
 import React from "react";
 import _ from "lodash";
+import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import dateFormat from "./dateFormat";
 
-const divStyle = {
-  padding: "5px",
-  margin: "10px 0 10px 0"
-};
-
-const buttonStyle = {
-  marginLeft: "15px"
+const style = {
+  divStyle: {
+    padding: "5px",
+    margin: "10px 0 10px 0"
+  },
+  buttonStyle: {
+    marginLeft: "15px"
+  }
 };
 
 const checkUserGroup = (event, group, userGroup) => {
   const userGroupUid = group.UserGroupUid;
   const userGroupDetail = userGroup[userGroupUid];
 
-  if (userGroupDetail) {
+  if (userGroupUid) {
     return (
-      <div key={userGroupUid} style={divStyle}>
+      <div key={userGroupUid} style={style.divStyle}>
         {/* Why is UserGroupUid for first group exist without name or users? */}
-        <Typography>
-          {userGroupDetail.Name}
+        <Grid container spacing={16}>
+          <Grid item xs={12} sm={3}>
+            <Typography variant="subheading">
+              {userGroupDetail ? userGroupDetail.Name : <CircularProgress />}{" "}
+            </Typography>
+          </Grid>
 
-          <Button
-            variant="contained"
-            size="small"
-            color="primary"
-            component={Link}
-            style={buttonStyle}
-            to={event.EventUid + "/" + userGroupUid}
-          >
-            View Users
-          </Button>
-        </Typography>
+          <Grid item xs={12} sm={3}>
+            <Typography>{userGroupUid}</Typography>
+          </Grid>
+
+          <Grid item xs={12} sm={3}>
+            <Typography>
+              <Button
+                variant="contained"
+                size="small"
+                color="primary"
+                component={Link}
+                style={style.buttonStyle}
+                to={event.EventUid + "/" + userGroupUid}
+              >
+                View Users
+              </Button>
+            </Typography>
+          </Grid>
+        </Grid>
       </div>
     );
   }
@@ -47,7 +62,7 @@ const checkUserGroup = (event, group, userGroup) => {
 const loadEvent = (event, userGroup) => {
   return (
     <div>
-      <Paper style={divStyle}>
+      <Paper style={style.divStyle}>
         <Typography variant="title">{event.Name}</Typography>
 
         <Typography variant="subheading">
@@ -55,12 +70,14 @@ const loadEvent = (event, userGroup) => {
           {dateFormat(event.EndTime, "end")}
         </Typography>
 
-        <Typography variant="caption">
-          {/* Removing <p> tags https://stackoverflow.com/questions/822452/strip-html-from-text-javascript */}
-          {event.LongDescription.replace(/<(?:.|\n)*?>/gm, "")}
-        </Typography>
+        {/* Commented out the description as it is likely not required for admins */}
 
-        <div style={divStyle} />
+        {/* <Typography variant="caption"> */}
+        {/* Removing <p> tags https://stackoverflow.com/questions/822452/strip-html-from-text-javascript */}
+        {/* {event.LongDescription.replace(/<(?:.|\n)*?>/gm, "")}
+        </Typography> }*/}
+
+        <div style={style.divStyle} />
 
         {_.map(event.UserGroupRegistrations, group =>
           checkUserGroup(event, group, userGroup)
