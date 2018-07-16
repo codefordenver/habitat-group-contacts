@@ -64,9 +64,8 @@ class UserGroup extends Component {
           endTime={eventEnd}
         />
         <div style={paddingStyle}>
-          <DownloadExcel />
+          <DownloadExcel userGroupName={userGroupName} startTime={eventStart} />
           <UserDetailHeader />
-
           {loadUsers(userGroup)}
         </div>
       </div>
