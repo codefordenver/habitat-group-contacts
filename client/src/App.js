@@ -9,6 +9,8 @@ class App extends Component {
     document.body.style.margin = 0;
   }
 
+  //Jetbrains test.
+
   render() {
     return (
       <div
