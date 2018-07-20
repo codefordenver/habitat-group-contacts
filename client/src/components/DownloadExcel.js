@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Papa from "papaparse";
 import Blob from "blob";
 import moment from "moment";
-import sanatizeFilename from "sanitize-filename";
+import sanitizeFilename from "sanitize-filename";
 import Button from "@material-ui/core/Button";
 import { userDataExtract } from "../utils/index";
 
@@ -21,7 +21,7 @@ class DownloadExcel extends Component {
       return moment(d).format("YYYYMMD");
     };
 
-    const fileName = sanatizeFilename(
+    const fileName = sanitizeFilename(
       this.props.userGroupName +
         "_EventDate-" +
         dateFormat(this.props.startTime) +
