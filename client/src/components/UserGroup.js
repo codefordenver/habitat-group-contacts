@@ -45,15 +45,16 @@ class UserGroup extends Component {
       return (
         <div>
           {group
-            ? _.map(group.UserRegistrations, registeredUser => (
-                <div key={registeredUser.UserUid}>
-                  <User
-                    lookupUser={registeredUser}
-                    deleted={registeredUser.Deleted}
-                  />
-                </div>
-              ))
-            : ''}
+            ? _.map(
+                group.UserRegistrations,
+                registeredUser =>
+                  !registeredUser.Deleted ? (
+                    <div key={registeredUser.UserUid}>
+                      <User lookupUser={registeredUser} />
+                    </div>
+                  ) : null,
+              )
+            : null}
         </div>
       );
     };

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchUser } from "../actions/fetchUser";
-import { bindActionCreators } from "redux";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import UserDetail from "../containers/UserDetail";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchUser } from '../actions/fetchUser';
+import { bindActionCreators } from 'redux';
+import LinearProgress from '@material-ui/core/LinearProgress';
+import UserDetail from '../containers/UserDetail';
 
 class UserList extends Component {
   componentWillMount() {
@@ -12,12 +12,11 @@ class UserList extends Component {
 
   render() {
     const { user } = this.props;
-    const { deleted } = this.props;
     return (
       <div>
         {user ? (
           <div>
-            <UserDetail user={user} deleted={deleted} />
+            <UserDetail user={user} />
           </div>
         ) : (
           <LinearProgress />
@@ -37,5 +36,5 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(UserList);
