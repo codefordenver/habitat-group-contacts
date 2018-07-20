@@ -1,4 +1,4 @@
-import moment from "moment/moment";
+import moment from "moment";
 
 const dateFormat = (date, type) => {
   const d = new Date(date);
