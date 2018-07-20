@@ -1,4 +1,4 @@
-export const CLEAR_USERS = 'CLEAR_USERS';
+export const CLEAR_USERS = "CLEAR_USERS";
 
 export function clearUsers() {
   return {

@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import _ from 'lodash';
-import User from './User';
-import { connect } from 'react-redux';
-import { fetchEvents } from '../actions/fetchEvents';
-import { fetchUserGroups } from '../actions/fetchUserGroups';
-import { clearUsers } from '../actions/clearUsers';
-import { bindActionCreators } from 'redux';
-import UserDetailHeader from '../containers/UserDetailHeader';
-import UserGroupDetails from '../containers/UserGroupDetails';
-import DownloadExcel from './DownloadExcel';
+import React, { Component } from "react";
+import _ from "lodash";
+import User from "./User";
+import { connect } from "react-redux";
+import { fetchEvents } from "../actions/fetchEvents";
+import { fetchUserGroups } from "../actions/fetchUserGroups";
+import { clearUsers } from "../actions/clearUsers";
+import { bindActionCreators } from "redux";
+import UserDetailHeader from "../containers/UserDetailHeader";
+import UserGroupDetails from "../containers/UserGroupDetails";
+import DownloadExcel from "./DownloadExcel";
 
 class UserGroup extends Component {
   componentWillMount() {
@@ -28,7 +28,7 @@ class UserGroup extends Component {
     const { usergroupid } = this.props.match.params;
 
     const paddingStyle = {
-      padding: '0 24px 0 24px',
+      padding: "0 24px 0 24px"
     };
 
     const eventName = event ? event.Name : null;
@@ -36,7 +36,7 @@ class UserGroup extends Component {
     const eventEnd = event ? event.EndTime : null;
 
     const userGroup = event
-      ? _.mapKeys(event.UserGroupRegistrations, 'UserGroupUid')[usergroupid]
+      ? _.mapKeys(event.UserGroupRegistrations, "UserGroupUid")[usergroupid]
       : null;
 
     const userGroupName = userGroups ? userGroups.Name : null;
@@ -52,7 +52,7 @@ class UserGroup extends Component {
                     <div key={registeredUser.UserUid}>
                       <User lookupUser={registeredUser} />
                     </div>
-                  ) : null,
+                  ) : null
               )
             : null}
         </div>
@@ -80,18 +80,18 @@ class UserGroup extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     event: state.events[ownProps.match.params.event],
-    userGroups: state.userGroups[ownProps.match.params.usergroupid],
+    userGroups: state.userGroups[ownProps.match.params.usergroupid]
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     { fetchEvents, fetchUserGroups, clearUsers },
-    dispatch,
+    dispatch
   );
 }
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(UserGroup);

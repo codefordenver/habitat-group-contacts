@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import ReduxPromise from 'redux-promise';
-import reducers from './reducers';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import registerServiceWorker from "./registerServiceWorker";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import ReduxPromise from "redux-promise";
+import reducers from "./reducers";
 
-require('dotenv').config();
+require("dotenv").config();
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
@@ -16,6 +16,6 @@ ReactDOM.render(
     <App />
   </Provider>,
 
-  document.getElementById('root'),
+  document.getElementById("root")
 );
 registerServiceWorker();
