@@ -1,4 +1,21 @@
-const userData = user => {
+import moment from "moment/moment";
+
+const dateFormat = (date, type) => {
+  const d = new Date(date);
+
+  switch (type) {
+    case "start":
+      return moment(d).format("MMMM Do YYYY, h:mm a");
+
+    case "end":
+      return moment(d).format("h:mm a");
+
+    default:
+      return null;
+  }
+};
+
+const userDataExtract = user => {
   const FIRST_NAME_UID = "01a07da8-05cc-45af-8e59-f8742cb7fa8e";
   const LAST_NAME_UID = "01a07da8-05cc-45af-8e59-f8742cb7fa8e";
   const PHONE_UID = "39969c13-32f0-4398-946a-50faa497c520";
@@ -19,4 +36,4 @@ const userData = user => {
   return userObject;
 };
 
-export default userData;
+export { dateFormat, userDataExtract };

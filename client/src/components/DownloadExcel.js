@@ -6,7 +6,7 @@ import Blob from "blob";
 import moment from "moment";
 import sanatizeFilename from "sanitize-filename";
 import Button from "@material-ui/core/Button";
-import userDataExtract from "../containers/userData";
+import { userDataExtract } from "../utils/index";
 
 class DownloadExcel extends Component {
   render() {
@@ -17,7 +17,7 @@ class DownloadExcel extends Component {
     const today = new Date();
 
     const dateFormat = date => {
-      var d = new Date(date);
+      const d = new Date(date);
       return moment(d).format("YYYYMMD");
     };
 

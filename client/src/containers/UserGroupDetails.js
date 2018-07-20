@@ -1,7 +1,7 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import dateFormat from "./dateFormat";
+import { dateFormat } from "../utils/index";
 import AppBar from "./AppBar";
 
 const UserGroupDetails = props => {

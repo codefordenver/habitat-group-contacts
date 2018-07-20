@@ -6,7 +6,7 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
-import dateFormat from "./dateFormat";
+import { dateFormat } from "../utils/index";
 
 const style = {
   divStyle: {

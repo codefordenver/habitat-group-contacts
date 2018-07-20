@@ -1,7 +1,7 @@
-import React from "react ";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import userDataExtract from "./userData";
+import { userDataExtract } from "../utils/index";
 
 const UserDetail = props => {
   const { user } = props;
