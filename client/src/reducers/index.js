@@ -6,7 +6,7 @@ import UserGroupReducer from './reducerUserGroup';
 const rootReducer = combineReducers({
   events: EventReducer,
   users: UserReducer,
-  userGroups: UserGroupReducer
+  userGroups: UserGroupReducer,
 });
 
 export default rootReducer;

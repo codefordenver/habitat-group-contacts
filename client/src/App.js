@@ -9,15 +9,13 @@ class App extends Component {
     document.body.style.margin = 0;
   }
 
-  //Jetbrains test.
-
   render() {
     return (
       <div
         className="App"
         style={{
           backgroundColor: '#fbfbfb',
-          minHeight: '100vh'
+          minHeight: '100vh',
         }}
       >
         <Grid container justify="center">
