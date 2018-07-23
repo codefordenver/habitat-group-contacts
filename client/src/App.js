@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import EventList from './components/EventList';
-import UserGroup from './components/UserGroup';
-import Grid from '@material-ui/core/Grid';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React, { Component } from "react";
+import EventList from "./components/EventList";
+import UserGroup from "./components/UserGroup";
+import Grid from "@material-ui/core/Grid";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class App extends Component {
   componentWillMount() {
@@ -14,8 +14,8 @@ class App extends Component {
       <div
         className="App"
         style={{
-          backgroundColor: '#fbfbfb',
-          minHeight: '100vh'
+          backgroundColor: "#fbfbfb",
+          minHeight: "100vh"
         }}
       >
         <Grid container justify="center">

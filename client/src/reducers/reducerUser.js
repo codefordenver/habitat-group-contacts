@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { FETCH_USER } from "../actions/fetchUser";
+import { CLEAR_USERS } from "../actions/clearUsers";
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -15,6 +16,8 @@ export default function(state = {}, action) {
       } else {
         return state;
       }
+    case CLEAR_USERS:
+      return {};
 
     default:
       return state;

@@ -4,14 +4,22 @@ import User from "./User";
 import { connect } from "react-redux";
 import { fetchEvents } from "../actions/fetchEvents";
 import { fetchUserGroups } from "../actions/fetchUserGroups";
+import { clearUsers } from "../actions/clearUsers";
 import { bindActionCreators } from "redux";
 import UserDetailHeader from "../containers/UserDetailHeader";
 import UserGroupDetails from "../containers/UserGroupDetails";
+import DownloadExcel from "./DownloadExcel";
 
 class UserGroup extends Component {
   componentWillMount() {
     this.props.fetchEvents();
-    this.props.fetchUserGroups();
+
+    // Clear the user list when changing user groups as the download excel is pulling from the Redux Store
+    this.props.clearUsers();
+    var i = 0;
+    for (i = 0; i < 30; i++) {
+      this.props.fetchUserGroups(i);
+    }
   }
 
   render() {
@@ -31,23 +39,22 @@ class UserGroup extends Component {
       ? _.mapKeys(event.UserGroupRegistrations, "UserGroupUid")[usergroupid]
       : null;
 
-    const userGroupName = userGroups[usergroupid]
-      ? userGroups[usergroupid].Name
-      : null;
+    const userGroupName = userGroups ? userGroups.Name : null;
 
-    const loadUsers = userGroup => {
+    const loadUsers = group => {
       return (
         <div>
-          {userGroup
-            ? _.map(userGroup.UserRegistrations, registeredUser => (
-                <div key={registeredUser.UserUid}>
-                  <User
-                    lookupUser={registeredUser}
-                    deleted={registeredUser.Deleted}
-                  />
-                </div>
-              ))
-            : ""}
+          {group
+            ? _.map(
+                group.UserRegistrations,
+                registeredUser =>
+                  !registeredUser.Deleted ? (
+                    <div key={registeredUser.UserUid}>
+                      <User lookupUser={registeredUser} />
+                    </div>
+                  ) : null
+              )
+            : null}
         </div>
       );
     };
@@ -61,6 +68,7 @@ class UserGroup extends Component {
           endTime={eventEnd}
         />
         <div style={paddingStyle}>
+          <DownloadExcel userGroupName={userGroupName} startTime={eventStart} />
           <UserDetailHeader />
           {loadUsers(userGroup)}
         </div>
@@ -72,12 +80,15 @@ class UserGroup extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     event: state.events[ownProps.match.params.event],
-    userGroups: state.userGroups
+    userGroups: state.userGroups[ownProps.match.params.usergroupid]
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchEvents, fetchUserGroups }, dispatch);
+  return bindActionCreators(
+    { fetchEvents, fetchUserGroups, clearUsers },
+    dispatch
+  );
 }
 
 export default connect(

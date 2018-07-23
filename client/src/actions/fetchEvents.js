@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const FETCH_EVENTS = 'FETCH_EVENTS';
+export const FETCH_EVENTS = "FETCH_EVENTS";
 
 export function fetchEvents() {
-  const url = '/api/v1/events?query=Time&earliestTime=2018-06-14T01:00:00';
+  const url = "/api/v1/events?query=Time&earliestTime=2018-06-14T01:00:00";
 
   const request = axios.get(url, {
     auth: {
