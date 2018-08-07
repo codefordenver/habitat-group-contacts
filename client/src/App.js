@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import EventList from "./components/EventList";
+import Login from "./components/Login";
+import HomePage from "./components/HomePage";
 import UserGroup from "./components/UserGroup";
+import NoMatch from "./containers/NoMatch";
 import Grid from "@material-ui/core/Grid";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 class App extends Component {
   componentWillMount() {
@@ -21,10 +23,12 @@ class App extends Component {
         <Grid container justify="center">
           <Grid item xs={12} md={10}>
             <Router>
-              <div>
-                <Route exact path="/" component={EventList} />
+              <Switch>
+                <Route exact path="/" component={Login} />
+                <Route exact path="/events" component={HomePage} />
                 <Route path="/:event/:usergroupid" component={UserGroup} />
-              </div>
+                <Route component={NoMatch} />
+              </Switch>
             </Router>
           </Grid>
         </Grid>

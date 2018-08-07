@@ -6,7 +6,6 @@ import { fetchUserGroups } from "../actions/fetchUserGroups";
 import { bindActionCreators } from "redux";
 import _ from "lodash";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import AppBar from "../containers/AppBar";
 
 class EventList extends Component {
   componentWillMount() {
@@ -20,8 +19,6 @@ class EventList extends Component {
   render() {
     return (
       <React.Fragment>
-        <AppBar title="Habitat for Humainty - Denver" />
-
         {this.props.events ? (
           _.map(this.props.events, event => (
             <EventCard
