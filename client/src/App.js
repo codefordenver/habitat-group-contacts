@@ -22,7 +22,7 @@ class App extends Component {
       >
         <Grid container justify="center">
           <Grid item xs={12} md={10}>
-            <Router>
+            <Router forceRefresh={true}>
               <Switch>
                 <Route exact path="/" component={Login} />
                 <Route exact path="/events" component={HomePage} />
