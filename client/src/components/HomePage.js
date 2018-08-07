@@ -40,14 +40,16 @@ class HomePage extends React.Component {
 
   handleFetchEvent() {
     //Add error handling of dates are null
-    const momentStartDate = moment(
-      this.state.startDate.startOf("day")
-    ).format();
+    const momentStartDate = this.state.startDate
+      ? moment(this.state.startDate.startOf("day")).format()
+      : null;
     const momentEndDate = this.state.endDate
       ? moment(this.state.endDate.endOf("day")).format()
       : null;
 
-    this.props.fetchEvents(momentStartDate, momentEndDate);
+    if (momentStartDate) {
+      this.props.fetchEvents(momentStartDate, momentEndDate);
+    }
   }
 
   render() {
@@ -60,7 +62,7 @@ class HomePage extends React.Component {
 
     return (
       <div>
-        <AppBar title="Habitat for Humainty - Denver" />
+        <AppBar title="Habitat for Humanity - Denver" />
         <div style={style.divStyle}>
           <Grid container alignItems="center">
             <Grid item xs={12} sm={3}>

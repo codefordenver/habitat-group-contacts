@@ -80,7 +80,7 @@ class UserGroup extends Component {
 
 function mapStateToProps(state, ownProps) {
   return {
-    event: state.events,
+    event: state.event,
     userGroups: state.userGroups[ownProps.match.params.usergroupid]
   };
 }
