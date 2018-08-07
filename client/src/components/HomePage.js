@@ -41,7 +41,7 @@ class HomePage extends React.Component {
   handleFetchEvent() {
     //Add error handling of dates are null
     const momentStartDate = this.state.startDate
-      ? moment(this.state.startDate.endOf("day")).format()
+      ? moment(this.state.startDate.startOf("day")).format()
       : null;
     const momentEndDate = this.state.endDate
       ? moment(this.state.endDate.endOf("day")).format()
