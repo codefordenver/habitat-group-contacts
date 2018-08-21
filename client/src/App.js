@@ -1,12 +1,20 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
+import Grid from "@material-ui/core/Grid";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import Login from "./components/Login";
 import HomePage from "./components/HomePage";
 import UserGroup from "./components/UserGroup";
 import NoMatch from "./containers/NoMatch";
-import Grid from "@material-ui/core/Grid";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import * as actions from './actions/index';
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.fetchGoogleUser();
+  }
+
   componentWillMount() {
     document.body.style.margin = 0;
   }
@@ -37,4 +45,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, actions)(App);
