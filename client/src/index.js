@@ -1,21 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
+import reduxThunk from 'redux-thunk';
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
-import ReduxPromise from "redux-promise";
+
+import App from "./App";
+import registerServiceWorker from "./registerServiceWorker";
 import reducers from "./reducers";
 
 require("dotenv").config();
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const createStoreWithMiddleware = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={createStoreWithMiddleware}>
     <App />
   </Provider>,
 
   document.getElementById("root")
+  //or? document.querySelector('#root')
 );
 registerServiceWorker();
+
+
+
+
+
+
