@@ -32,6 +32,9 @@
     "/api": {
       "target": "https://denver.volunteerhub.com",
       "changeOrigin": true
+    },
+    "/auth": {
+      "target": "http://localhost:5000"
     }
   }
 }
