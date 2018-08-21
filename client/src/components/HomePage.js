@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
-import AppBar from "../containers/AppBar";
+import AppBar from "../containers/SimpleAppBar";
 import EventList from "./EventList";
 
 import "react-datepicker/dist/react-datepicker.css";
