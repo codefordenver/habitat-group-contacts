@@ -34,7 +34,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Login} />
                 <Route exact path="/events" component={HomePage} />
-                <Route path="/:event/:usergroupid" component={UserGroup} />
+                <Route path="/events/:event/:usergroupid" component={UserGroup} />
                 <Route component={NoMatch} />
               </Switch>
             </Router>
