@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from 'react-router-dom'
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -19,6 +18,7 @@ const styles = {
 class SimpleAppBar extends React.Component {
 
   renderContent() {
+    console.log(this.props.auth);
       switch (this.props.auth) {
         case null:
           return;
@@ -26,14 +26,14 @@ class SimpleAppBar extends React.Component {
         case false:
           return (
             <React.Fragment>
-              <Button color="inherit" component={Link} to="/auth/google">Login With Google</Button>
+              <Button color="inherit" href="/auth/google">Login With Google</Button>
             </React.Fragment>
           );
 
         default:
           return (
             <React.Fragment>
-              <Button color="inherit" component={Link} to="/auth/logout">Logout</Button>
+              <Button color="inherit" href="/auth/logout">Logout</Button>
             </React.Fragment>
           );
       }
