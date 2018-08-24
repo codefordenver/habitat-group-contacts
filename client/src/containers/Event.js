@@ -45,7 +45,7 @@ const checkUserGroup = (event, group, userGroup) => {
                 color="primary"
                 component={Link}
                 style={style.buttonStyle}
-                to={event.EventUid + "/" + userGroupUid}
+                to={"events/" + event.EventUid + "/" + userGroupUid}
               >
                 View Users
               </Button>
