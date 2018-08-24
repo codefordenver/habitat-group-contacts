@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import reduxThunk from 'redux-thunk';
+import reduxThunk from "redux-thunk";
+import ReduxPromise from "redux-promise"; //Need to refactor promise actions to redux-thunk
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 
@@ -10,7 +11,11 @@ import reducers from "./reducers";
 
 require("dotenv").config();
 
-const createStoreWithMiddleware = createStore(reducers, {}, applyMiddleware(reduxThunk));
+const createStoreWithMiddleware = createStore(
+  reducers,
+  {},
+  applyMiddleware(reduxThunk, ReduxPromise)
+);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware}>
@@ -21,9 +26,3 @@ ReactDOM.render(
   //or? document.querySelector('#root')
 );
 registerServiceWorker();
-
-
-
-
-
-

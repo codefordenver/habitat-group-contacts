@@ -2,7 +2,6 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import { dateFormat } from "../utils/index";
-import AppBar from "./SimpleAppBar";
 
 const UserGroupDetails = props => {
   const eventTime =
@@ -16,8 +15,6 @@ const UserGroupDetails = props => {
 
   return (
     <React.Fragment>
-      <AppBar title={"User Group: " + props.userGroupName} />
-
       <div style={{ margin: "10px" }} />
 
       <div style={paddingStyle}>
