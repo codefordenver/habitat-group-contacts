@@ -12,23 +12,9 @@ After files are copied, execute the following command in both root directory and
 
 `npm install`
 
-### Starting React Server
-
-#### Setup .env file
-
-Remove the `_sample` from the `.env` file.
-
-Add the VolunteerHub username and password to the `.env` which is used to access the API.
-
-#### Run React Server
-
-Navigate to the `client` folder and run `npm run start`
-
-React server will start on `http://localhost:3000/`
-
 # Running the local dev server
 
-Once the local setup is complete. You can run the dev server while in the root directory using the command:
+Once the local setup is complete for both the root and client directories. You can run the dev server while in the root directory using the command:
 
 `npm run dev`
 
@@ -52,7 +38,7 @@ There is an example file called **ex_dev.js.** Remove the **ex\_** so the file s
 5.  Click "Enable APIs and SERVICES at the top of the dashboard.
 6.  Search for "Google+ API," click "ENABLE" and wait for it to load.
 7.  On the Left Navbar click on Credentials link.
-8.  Click on "OAuth consent screen" and enter a product name such as "Habit-dev." For the dev server the remaining fields can be left blank.  Select Save.
+8.  Click on "OAuth consent screen" and enter a product name such as "Habit-dev." For the dev server the remaining fields can be left blank. Select Save.
 9.  Click on Credentials again and now click the "Create Credentials" and then select "OAuth Client ID."
 10. Select the "Web Application" radio button. The Name can be left the same but the Restrictions need to be setup as follows:
 
@@ -87,8 +73,6 @@ There is an example file called **ex_dev.js.** Remove the **ex\_** so the file s
 
 - cookieKey: 'Place cookieKey Here'
 
-
 ### Waffle Link
 
 This repo was created from https://cfd-new.herokuapp.com. Use [the Waffle board](https://waffle.io/codefordenver/habitat-group-contacts) for this repo to always know what to do next for your project!
-

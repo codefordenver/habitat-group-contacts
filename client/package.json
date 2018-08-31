@@ -35,6 +35,9 @@
     },
     "/auth": {
       "target": "http://localhost:5000"
+    },
+    "/volunteer": {
+      "target": "http://localhost:5000"
     }
   }
 }
