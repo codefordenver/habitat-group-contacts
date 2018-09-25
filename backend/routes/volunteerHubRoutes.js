@@ -1,5 +1,6 @@
 const axios = require("axios");
 const keys = require("../config/keys");
+const stub = require("../services/stubs.js");
 
 module.exports = app => {
   //GET EVENTS LIST FROM VOLUNTEER HUB
@@ -20,7 +21,24 @@ module.exports = app => {
           password: keys.volunteerHubPassword
         }
       })
-      .then(request => res.send(request.data), error => console.log(error));
+      .then(
+        request => {
+          console.log("=== NEW EVENT REQUEST ===");
+          var { data } = request;
+          data.map(event => {
+            const eventUID = event.EventGroupUid;
+
+            event.UserGroupRegistrations.map(async usergroup => {
+              const groupUID = usergroup.UserGroupUid;
+
+              const userGroupStub = await stub.getStub(eventUID, groupUID);
+              console.log(userGroupStub.url_stub);
+            });
+          });
+          res.send(data);
+        },
+        error => console.log(error)
+      );
   });
 
   //GET EVENTS BY ID FROM VOLUNTEER HUB
@@ -65,7 +83,7 @@ module.exports = app => {
       page +
       "&pageSize=50";
 
-    console.log("Get Request : " + url);
+    //console.log("Get Request : " + url);
 
     axios
       .get(url, {
@@ -88,4 +106,24 @@ module.exports = app => {
         }
       );
   });
+};
+
+const returnStubs = async data => {
+  data_object = JSON.parse(data);
+  data.map(async (event, event_i) => {
+    const eventUID = event.EventGroupUid;
+    event.UserGroupRegistrations.map(async (usergroup, usergroup_i) => {
+      const groupUID = usergroup.UserGroupUid;
+
+      const userGroupStub = await stub.getStub(eventUID, groupUID);
+
+      console.log(userGroupStub);
+      data_object[event_i].UserGroupRegistrations[usergroup_i].push({
+        stub: userGroupStub
+      });
+      console.log(data_object);
+    });
+  });
+  //data_object_str = JSON.stringify(data_object);
+  //return data_object_str;
 };

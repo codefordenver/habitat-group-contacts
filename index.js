@@ -4,7 +4,12 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const bodyParser = require("body-parser");
 const keys = require("./backend/config/keys");
+
+//IMPORT MODELS
 require("./backend/models/User");
+require("./backend/models/Events");
+
+//IMPORT SERVICES
 require("./backend/services/passport");
 
 mongoose.connect(keys.mongoURI);
@@ -22,8 +27,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-//APPLICATION ROUTES
+//IMPORT ROUTES
 require("./backend/routes/authRoutes")(app);
+require("./backend/routes/mongoRoutes")(app);
 require("./backend/routes/volunteerHubRoutes")(app);
 
 //PRODUCTION ENVIRONMENT CHECK
