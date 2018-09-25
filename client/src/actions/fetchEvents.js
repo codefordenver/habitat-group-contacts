@@ -6,7 +6,7 @@ export const FETCH_USERGROUP = "FETCH_USERGROUP";
 
 export function fetchEvents(startDate, endDate) {
   const latestTime = endDate ? `&latestTime=${endDate}` : "";
-  const url = "/volunteer/events";
+  const url = "/api/volunteer/events";
   const request = axios.get(url, {
     params: { startDate: startDate, latestTime: latestTime }
   });
@@ -18,7 +18,7 @@ export function fetchEvents(startDate, endDate) {
 }
 
 export function fetchEventsID(eventID) {
-  const url = "/volunteer/eventsID";
+  const url = "/api/volunteer/eventsID";
   const request = axios.get(url, { params: { eventID: eventID } });
 
   return {
@@ -28,7 +28,7 @@ export function fetchEventsID(eventID) {
 }
 
 export function fetchUserGroups(page) {
-  const url = "/volunteer/usergroups";
+  const url = "/api/volunteer/usergroups";
 
   const request = axios.get(url, { params: { page: page } });
 

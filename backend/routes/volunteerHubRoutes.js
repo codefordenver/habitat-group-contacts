@@ -3,7 +3,7 @@ const keys = require("../config/keys");
 
 module.exports = app => {
   //GET EVENTS LIST FROM VOLUNTEER HUB
-  app.get("/volunteer/events", (req, res) => {
+  app.get("/api/volunteer/events", (req, res) => {
     const startDate = req.query.startDate;
     const latestTime = req.query.latestTime;
     url =
@@ -24,7 +24,7 @@ module.exports = app => {
   });
 
   //GET EVENTS BY ID FROM VOLUNTEER HUB
-  app.get("/volunteer/eventsID", (req, res) => {
+  app.get("/api/volunteer/eventsID", (req, res) => {
     const eventID = req.query.eventID;
     url = "https://denver.volunteerhub.com/api/v1/events/" + eventID;
 
@@ -41,7 +41,7 @@ module.exports = app => {
   });
 
   //GET USERS BY ID FROM VOLUNTEER HUB
-  app.get("/volunteer/user", (req, res) => {
+  app.get("/api/volunteer/user", (req, res) => {
     const id = req.query.id;
     url = "https://denver.volunteerhub.com/api/v2/users/" + id;
 
@@ -58,7 +58,7 @@ module.exports = app => {
   });
 
   //GET USERGROUPS BY PAGE FROM VOLUNTEER HUB
-  app.get("/volunteer/usergroups", (req, res) => {
+  app.get("/api/volunteer/usergroups", (req, res) => {
     const page = req.query.page;
     url =
       "https://denver.volunteerhub.com/api/v1/usergroups?page=" +

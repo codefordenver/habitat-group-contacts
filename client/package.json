@@ -29,14 +29,10 @@
     "eject": "react-scripts eject"
   },
   "proxy": {
-    "/api": {
-      "target": "https://denver.volunteerhub.com",
-      "changeOrigin": true
-    },
     "/auth": {
       "target": "http://localhost:5000"
     },
-    "/volunteer": {
+    "/api": {
       "target": "http://localhost:5000"
     }
   }
