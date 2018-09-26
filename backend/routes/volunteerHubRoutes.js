@@ -26,13 +26,13 @@ module.exports = app => {
           console.log("=== NEW EVENT REQUEST ===");
           var { data } = request;
           data.map(event => {
-            const eventUID = event.EventGroupUid;
+            const eventUID = event.EventUid;
 
             event.UserGroupRegistrations.map(async usergroup => {
               const groupUID = usergroup.UserGroupUid;
 
               const userGroupStub = await stub.getStub(eventUID, groupUID);
-              console.log(userGroupStub.url_stub);
+              //console.log(userGroupStub.url_stub);
             });
           });
           res.send(data);

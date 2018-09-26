@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const FETCH_EVENTS = "FETCH_EVENTS";
+export const FETCH_STUB = "FETCH_STUB";
 export const FETCH_EVENTS_ID = "FETCH_EVENTS_ID";
 export const FETCH_USERGROUP = "FETCH_USERGROUP";
 
@@ -13,6 +14,18 @@ export function fetchEvents(startDate, endDate) {
 
   return {
     type: FETCH_EVENTS,
+    payload: request
+  };
+}
+
+export function fetchStub(eventUID, usergroupUID) {
+  const url = "/api/db/stub";
+  const request = axios.get(url, {
+    params: { eventUID: eventUID, usergroupUID: usergroupUID }
+  });
+
+  return {
+    type: FETCH_STUB,
     payload: request
   };
 }

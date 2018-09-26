@@ -12,15 +12,31 @@ const getStub = async (event_uid, usergroup_uid) => {
 
   if (existingEvent) {
     //Record Already Exists
-    //console.log("Stub exists for " + event_uid + " / " + usergroup_uid)
+    //console.log("Stub exists for " + event_uid + " / " + usergroup_uid);
     return existingEvent;
   }
 
-  //!!NOTE -- SHOULD CHECK IF URL_STUB ALREADY EXISTS.
-  var url_stub = generator.generate({
-    length: 20,
-    numbers: true
-  });
+  //!!NOTE -- LOW CHANCE, BUT SHOULD CHECK IF URL_STUB ALREADY EXISTS.
+  const url_stub_generator = async () => {
+    var new_stub = generator.generate({
+      length: 20,
+      numbers: true
+    });
+
+    const existingStub = await Events.findOne({
+      url_stub: new_stub
+    });
+
+    if (existingStub) {
+      console.log("Stub Collision Exists");
+      return url_stub_generator();
+    }
+
+    //console.log("New Stub: " + new_stub + " - Stub Exists: " + existingStub);
+    return new_stub;
+  };
+
+  const url_stub = await url_stub_generator();
 
   //Create new event
   const event = await new Events({
@@ -38,4 +54,4 @@ const lookupStub = async url_stub => {
   return event;
 };
 
-module.exports = {getStub, lookupStub};
+module.exports = { getStub, lookupStub };

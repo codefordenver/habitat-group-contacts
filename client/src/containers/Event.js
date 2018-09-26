@@ -7,6 +7,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import { dateFormat } from "../utils/index";
+import Stub from "../components/Stub";
 
 const style = {
   divStyle: {
@@ -51,6 +52,13 @@ const checkUserGroup = (event, group, userGroup) => {
               </Button>
             </Typography>
           </Grid>
+
+          <Grid item xs={12} sm={3}>
+            <Stub 
+              EventUid = {event.EventUid}
+              userGroupUid = {userGroupUid}
+              />
+          </Grid>
         </Grid>
       </div>
     );
@@ -63,7 +71,7 @@ const loadEvent = (event, userGroup) => {
   return (
     <div>
       <Paper style={style.divStyle}>
-        <Typography variant="title">{event.Name}</Typography>
+        <Typography variant="title">{event.Name} [{event.EventUid}] </Typography>
 
         <Typography variant="subheading">
           {dateFormat(event.StartTime, "start")} {" - "}
@@ -90,7 +98,7 @@ const loadEvent = (event, userGroup) => {
 const Event = props => {
   return (
     <React.Fragment>
-      {props.event ? loadEvent(props.event, props.userGroups) : null}
+      {props.event ? loadEvent(props.event, props.userGroups, props.url_stub) : null}
     </React.Fragment>
   );
 };

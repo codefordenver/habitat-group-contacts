@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import EventCard from "../containers/Event";
 import { connect } from "react-redux";
-import { fetchEvents } from "../actions/fetchEvents";
-import { fetchUserGroups } from "../actions/fetchEvents";
+import { fetchEvents, fetchUserGroups } from "../actions/fetchEvents";
 import { bindActionCreators } from "redux";
 import _ from "lodash";
 import LinearProgress from "@material-ui/core/LinearProgress";
