@@ -98,7 +98,7 @@ const loadEvent = (event, userGroup) => {
 const Event = props => {
   return (
     <React.Fragment>
-      {props.event ? loadEvent(props.event, props.userGroups, props.url_stub) : null}
+      {props.event ? loadEvent(props.event, props.userGroups) : null}
     </React.Fragment>
   );
 };

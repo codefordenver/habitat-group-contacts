@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import HomePage from "./components/HomePage";
 import EventPage from "./components/EventPage";
 import UserGroup from "./components/UserGroup";
+import UserGroupStub from "./components/UserGroupStub";
 import NoMatch from "./containers/NoMatch";
 import * as actions from "./actions/index";
 
@@ -38,6 +39,10 @@ class App extends Component {
                   <Route
                     path="/events/:event/:usergroupid"
                     component={UserGroup}
+                  />
+                  <Route
+                    path="/event/:url_stub"
+                    component={UserGroupStub}
                   />
                   <Route component={NoMatch} />
                 </Switch>

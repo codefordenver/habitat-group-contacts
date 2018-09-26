@@ -2,10 +2,22 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchStub } from "../actions/fetchEvents";
 import { bindActionCreators } from "redux";
-import LinearProgress from "@material-ui/core/LinearProgress";
-import UserDetail from "../containers/UserDetail";
+import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Typography from "@material-ui/core/Typography";
 
-class URL_STUB extends Component {
+const style = {
+  divStyle: {
+    padding: "5px",
+    margin: "10px 0 10px 0"
+  },
+  buttonStyle: {
+    marginLeft: "15px"
+  }
+};
+
+class Stub extends Component {
   componentWillMount() {
     const EventUid = this.props.EventUid;
     const userGroupUid = this.props.userGroupUid;
@@ -14,10 +26,25 @@ class URL_STUB extends Component {
 
   render() {
     const { stub } = this.props;
-    
+
     return (
       <div>
-        {stub ? stub.url_stub : ""}
+        {stub ? (
+          <Typography>
+            <Button
+              variant="contained"
+              size="small"
+              color="primary"
+              component={Link}
+              style={style.buttonStyle}
+              to={"event/" + stub.url_stub}
+            >
+              Stub Link
+            </Button>
+          </Typography>
+        ) : (
+          <CircularProgress />
+        )}
       </div>
     );
   }
@@ -34,4 +61,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(URL_STUB);
+)(Stub);
