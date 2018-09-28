@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import _ from "lodash";
 import User from "./User";
 import { connect } from "react-redux";
-import { fetchEventsID } from "../actions/fetchEvents";
-import { fetchUserGroups } from "../actions/fetchEvents";
+import {
+  fetchEventByStub,
+  fetchUserGroupIdByStub,
+  fetchUserGroups
+} from "../actions/fetchEvents";
 import { clearUsers } from "../actions/fetchUser";
 import { bindActionCreators } from "redux";
 import UserDetailHeader from "../containers/UserDetailHeader";
@@ -12,8 +15,8 @@ import DownloadExcel from "./DownloadExcel";
 
 class UserGroup extends Component {
   componentWillMount() {
-    //this.props.fetchEventsID(this.props.match.params.stub);
-    console.log(this.props.match.params);
+    this.props.fetchEventByStub(this.props.match.params.url_stub);
+    this.props.fetchUserGroupIdByStub(this.props.match.params.url_stub);
 
     // Clear the user list when changing user groups as the download excel is pulling from the Redux Store
     this.props.clearUsers();
@@ -26,7 +29,7 @@ class UserGroup extends Component {
   render() {
     const { event } = this.props;
     const { userGroups } = this.props;
-    const { usergroupid } = this.props.match.params;
+    const { usergroupid } = this.props;
 
     const paddingStyle = {
       padding: "0 24px 0 24px"
@@ -81,13 +84,14 @@ class UserGroup extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     event: state.event,
-    userGroups: state.userGroups[ownProps.match.params.usergroupid]
+    userGroups: state.userGroups[ownProps.match.params.usergroupid],
+    usergroupid: state.userGroupsId
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { fetchEventsID, fetchUserGroups, clearUsers },
+    { fetchEventByStub, fetchUserGroupIdByStub, fetchUserGroups, clearUsers },
     dispatch
   );
 }

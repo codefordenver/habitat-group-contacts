@@ -23,7 +23,7 @@ module.exports = app => {
       })
       .then(
         request => {
-          console.log("=== NEW EVENT REQUEST ===");
+          //console.log("=== NEW EVENT REQUEST ===");
           var { data } = request;
           data.map(event => {
             const eventUID = event.EventUid;
@@ -46,7 +46,7 @@ module.exports = app => {
     const eventID = req.query.eventID;
     url = "https://denver.volunteerhub.com/api/v1/events/" + eventID;
 
-    console.log("Get Request : " + url);
+    //console.log("Get Request : " + url);
 
     axios
       .get(url, {
@@ -63,7 +63,7 @@ module.exports = app => {
     const id = req.query.id;
     url = "https://denver.volunteerhub.com/api/v2/users/" + id;
 
-    console.log("Get Request : " + url);
+    //console.log("Get Request : " + url);
 
     axios
       .get(url, {
@@ -106,24 +106,4 @@ module.exports = app => {
         }
       );
   });
-};
-
-const returnStubs = async data => {
-  data_object = JSON.parse(data);
-  data.map(async (event, event_i) => {
-    const eventUID = event.EventGroupUid;
-    event.UserGroupRegistrations.map(async (usergroup, usergroup_i) => {
-      const groupUID = usergroup.UserGroupUid;
-
-      const userGroupStub = await stub.getStub(eventUID, groupUID);
-
-      console.log(userGroupStub);
-      data_object[event_i].UserGroupRegistrations[usergroup_i].push({
-        stub: userGroupStub
-      });
-      console.log(data_object);
-    });
-  });
-  //data_object_str = JSON.stringify(data_object);
-  //return data_object_str;
 };
