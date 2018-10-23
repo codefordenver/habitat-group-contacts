@@ -6,7 +6,6 @@ import Blob from "blob";
 import moment from "moment";
 import sanitizeFilename from "sanitize-filename";
 import Button from "@material-ui/core/Button";
-import { userDataExtract } from "../utils/index";
 
 class DownloadExcel extends Component {
   render() {
@@ -33,7 +32,11 @@ class DownloadExcel extends Component {
     const formatUsers = users => {
       var userData = {};
       return (userData = _.map(users, user => {
-        const userObject = userDataExtract(user);
+        const userObject = {
+          Name: user.FirstName + " " + user.LastName,
+          Phone: user.Phone,
+          Email: user.Email
+        };
         return Object.assign({}, userData, userObject);
       }));
     };

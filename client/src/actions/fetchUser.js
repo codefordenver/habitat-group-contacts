@@ -4,6 +4,7 @@ export const CLEAR_USERS = "CLEAR_USERS";
 export const FETCH_USER = "FETCH_USER";
 
 export function fetchUser(id) {
+  //UPDATE TO DB
   const url = "/api/volunteer/user";
 
   const request = axios.get(url, { params: { id: id } });
