@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import EventCard from "../containers/Event";
+import EventCard from "../containers/EventCard";
 import { connect } from "react-redux";
 import { fetchEvents, fetchUserGroups } from "../actions/fetchEvents";
 import { bindActionCreators } from "redux";
