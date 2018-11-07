@@ -19,9 +19,9 @@ const style = {
 
 class Stub extends Component {
   componentWillMount() {
-    const EventUid = this.props.EventUid;
-    const userGroupUid = this.props.userGroupUid;
-    this.props.fetchStub(EventUid, userGroupUid);
+    const {EventUid} = this.props;
+    const {UserGroupUid} = this.props;
+    this.props.fetchStub(EventUid, UserGroupUid);
   }
 
   render() {
@@ -39,7 +39,7 @@ class Stub extends Component {
               style={style.buttonStyle}
               to={"event/" + stub.url_stub}
             >
-              Stub Link
+              View Event Details
             </Button>
           </Typography>
         ) : (
@@ -51,7 +51,7 @@ class Stub extends Component {
 }
 
 function mapStateToProps({ stub }, ownProps) {
-  return { stub: stub[ownProps.EventUid + "/" + ownProps.userGroupUid] };
+  return { stub: stub[ownProps.EventUid + "/" + ownProps.UserGroupUid] };
 }
 
 function mapDispatchToProps(dispatch) {

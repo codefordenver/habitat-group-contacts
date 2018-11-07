@@ -18,12 +18,15 @@ const style = {
 };
 
 const checkUserGroup = (event, group, userGroup) => {
-  const userGroupUid = group.UserGroupUid;
-  const userGroupDetail = userGroup[userGroupUid];
+  const {UserGroupUid} = group;
+  const userGroupDetail = userGroup[UserGroupUid];
+  const userCount = group.UserRegistrations.length;
+  console.log(userCount);
 
-  if (userGroupUid) {
+  // Add the following to hide groups with 0 reserved slots "&& group.SlotsReserved > 0"
+  if (UserGroupUid) {
     return (
-      <div key={userGroupUid} style={style.divStyle}>
+      <div key={UserGroupUid} style={style.divStyle}>
         {/* Why is UserGroupUid for first group exist without name or users? */}
         <Grid container spacing={16}>
           <Grid item xs={12} sm={3}>
@@ -33,11 +36,15 @@ const checkUserGroup = (event, group, userGroup) => {
           </Grid>
 
           <Grid item xs={12} sm={3}>
-            <Typography>{userGroupUid}</Typography>
+            <Typography>{UserGroupUid}</Typography>
           </Grid>
 
           <Grid item xs={12} sm={3}>
-            <Stub EventUid={event.EventUid} userGroupUid={userGroupUid} />
+            <Typography>Users: {userCount}</Typography>
+          </Grid>
+
+          <Grid item xs={12} sm={3}>
+            <Stub EventUid={event.EventUid} UserGroupUid={UserGroupUid} />
           </Grid>
         </Grid>
       </div>
