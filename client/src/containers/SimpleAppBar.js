@@ -26,14 +26,14 @@ class SimpleAppBar extends React.Component {
         case false:
           return (
             <React.Fragment>
-              <Button color="inherit" href="/auth/google">Login With Google</Button>
+              <Button color="inherit" href="/api/auth/google">Login With Google</Button>
             </React.Fragment>
           );
 
         default:
           return (
             <React.Fragment>
-              <Button color="inherit" href="/auth/logout">Logout</Button>
+              <Button color="inherit" href="/api/auth/logout">Logout</Button>
             </React.Fragment>
           );
       }

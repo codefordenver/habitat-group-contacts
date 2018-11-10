@@ -28,9 +28,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //IMPORT ROUTES
-require("./backend/routes/authRoutes")(app);
-require("./backend/routes/mongoRoutes")(app);
-require("./backend/routes/volunteerHubRoutes")(app);
+const routes = require('./backend/routes');
+app.use(routes);
 
 //PRODUCTION ENVIRONMENT CHECK
 if (process.env.NODE_ENV === "production") {

@@ -43,7 +43,7 @@ There is an example file called **ex_dev.js.** Remove the **ex\_** so the file s
 10. Select the "Web Application" radio button. The Name can be left the same but the Restrictions need to be setup as follows:
 
 - Authorized JavaScript origins: http://localhost:5000
-- Authorized redirect URIs: http://localhost:5000/auth/google/callback and http://localhost:3000/auth/google/callback
+- Authorized redirect URIs: http://localhost:5000/api/auth/google/callback and http://localhost:3000/api/auth/google/callback
 - Select Create.
 
 11. Now the OAuth client ID and secret key should be provided. Add these as a string to their respective fields in the **dev.js** file.
