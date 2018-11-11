@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { FETCH_USERGROUP } from "../actions/fetchUserGroups";
+import { FETCH_USERGROUP } from "../actions/fetchEvents";
 
 export default function(state = {}, action) {
   switch (action.type) {

@@ -1,6 +1,4 @@
-import _ from "lodash";
-import { FETCH_USER } from "../actions/fetchUser";
-import { CLEAR_USERS } from "../actions/clearUsers";
+import { FETCH_USER, CLEAR_USERS } from "../actions/fetchUser";
 
 export default function(state = {}, action) {
   switch (action.type) {
@@ -8,10 +6,7 @@ export default function(state = {}, action) {
       if (action.payload.data) {
         return {
           ...state,
-          [action.payload.data.UserUid]: _.mapKeys(
-            action.payload.data.FormAnswers,
-            "FormQuestionUid"
-          )
+          [action.payload.data.UserUid]: action.payload.data
         };
       } else {
         return state;

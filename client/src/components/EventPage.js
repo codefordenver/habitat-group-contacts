@@ -60,7 +60,6 @@ class HomePage extends React.Component {
     };
 
     return (
-      <div>
         <div style={style.divStyle}>
           <Grid container alignItems="center">
             <Grid item xs={12} sm={3}>
@@ -90,11 +89,12 @@ class HomePage extends React.Component {
               </Button>
             </Grid>
             <Grid item xs={12}>
+
               <EventList />
+
             </Grid>
           </Grid>
         </div>
-      </div>
     );
   }
 }

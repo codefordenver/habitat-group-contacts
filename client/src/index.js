@@ -9,8 +9,6 @@ import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import reducers from "./reducers";
 
-require("dotenv").config();
-
 const createStoreWithMiddleware = createStore(
   reducers,
   {},

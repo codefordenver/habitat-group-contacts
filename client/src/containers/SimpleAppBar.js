@@ -18,7 +18,7 @@ const styles = {
 class SimpleAppBar extends React.Component {
 
   renderContent() {
-    console.log(this.props.auth);
+    //console.log(this.props.auth);
       switch (this.props.auth) {
         case null:
           return;
@@ -26,14 +26,14 @@ class SimpleAppBar extends React.Component {
         case false:
           return (
             <React.Fragment>
-              <Button color="inherit" href="/auth/google">Login With Google</Button>
+              <Button color="inherit" href="/api/auth/google">Login With Google</Button>
             </React.Fragment>
           );
 
         default:
           return (
             <React.Fragment>
-              <Button color="inherit" href="/auth/logout">Logout</Button>
+              <Button color="inherit" href="/api/auth/logout">Logout</Button>
             </React.Fragment>
           );
       }

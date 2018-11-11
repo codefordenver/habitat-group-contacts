@@ -1,11 +1,16 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cookieSession = require('cookie-session');
-const passport = require('passport');
-const bodyParser = require('body-parser');
-const keys = require('./backend/config/keys');
-require('./backend/models/User');
-require('./backend/services/passport');
+const express = require("express");
+const mongoose = require("mongoose");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
+const bodyParser = require("body-parser");
+const keys = require("./backend/config/keys");
+
+//IMPORT MODELS
+require("./backend/models/User");
+require("./backend/models/Events");
+
+//IMPORT SERVICES
+require("./backend/services/passport");
 
 mongoose.connect(keys.mongoURI);
 const app = express();
@@ -22,15 +27,18 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./backend/routes/authRoutes')(app);
+//IMPORT ROUTES
+const routes = require('./backend/routes');
+app.use(routes);
 
-if (process.env.NODE_ENV === 'production') {
+//PRODUCTION ENVIRONMENT CHECK
+if (process.env.NODE_ENV === "production") {
   //Express to serve up production assets (main.css and main.js)
-  app.use(express.static('client/build'));
+  app.use(express.static("client/build"));
   //Express to serve up index.html
-  const path = require('path');
-  app.get('*', () => (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', index.html));
+  const path = require("path");
+  app.get("*", () => (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", index.html));
   });
 }
 
