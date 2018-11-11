@@ -21,8 +21,8 @@ class DownloadExcel extends Component {
     };
 
     const fileName = sanitizeFilename(
-      this.props.userGroupName +
-        "_EventDate-" +
+      // this.props.userGroupName +
+        "EventDate-" +
         dateFormat(this.props.startTime) +
         "_Exported-" +
         dateFormat(today) +

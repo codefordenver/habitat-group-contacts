@@ -3,6 +3,7 @@ const keys = require("../../config/keys");
 const stub = require("../../services/stubs.js");
 const _ = require("lodash");
 const router = require('express').Router();
+const { processUser, requestOptions } = require("../../services/processRequests.js");
 
 router.route("/stub").get(async (req, res) => {
   const eventUID = req.query.eventUID;
@@ -45,6 +46,28 @@ router.route("/usergroup").get(async (req, res) => {
   };
 
   res.send(returned_event);
+});
+
+//GET USERS BY ID FROM VOLUNTEER HUB
+router.route("/user").get((req, res) => {
+  const id = req.query.id;
+  url = "https://denver.volunteerhub.com/api/v2/users/" + id;
+
+  axios.get(url, requestOptions).then(
+    request => {
+      try{
+        res.send(processUser(request.data));
+      }
+      catch(error){
+        console.log("Error URL : " + url);
+        console.log(request.data);
+        console.log(error);
+      }
+    },
+    error => {
+      console.log("Error URL : " + url);
+      console.log(error)}
+  );
 });
 
 module.exports = router;

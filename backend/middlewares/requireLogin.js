@@ -3,5 +3,7 @@ module.exports = (req, res, next) => {
     return res.status(401).send({ error: "You must log in!" });
   }
 
+  console.log("Login by Google");
+
   next();
 };

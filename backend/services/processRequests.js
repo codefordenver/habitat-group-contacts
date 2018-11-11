@@ -1,4 +1,5 @@
 const _ = require("lodash");
+const keys = require("../config/keys");
 
 const processUser = data => {
   const {UserUid} = data;
@@ -13,10 +14,10 @@ const processUser = data => {
   const PHONE_UID = "39969c13-32f0-4398-946a-50faa497c520";
   const EMAIL_UID = "5573ba82-5374-4401-8d70-0c55492817e7";
 
-  const FirstName = user[FIRST_NAME_UID].FirstName;
-  const LastName = user[LAST_NAME_UID].LastName;
-  const Phone = user[PHONE_UID].Value;
-  const Email = user[EMAIL_UID].Value;
+  const FirstName = user[FIRST_NAME_UID] ? user[FIRST_NAME_UID].FirstName : "n/a";
+  const LastName = user[LAST_NAME_UID] ? user[LAST_NAME_UID].LastName : "n/a" ;
+  const Phone = user[PHONE_UID] ? user[PHONE_UID].Value : "n/a";
+  const Email = user[EMAIL_UID] ? user[EMAIL_UID].Value : "n/a";
 
   const userObject = {
     UserUid: UserUid,
@@ -29,4 +30,11 @@ const processUser = data => {
   return userObject;
 };
 
-module.exports = { processUser };
+const requestOptions = {
+  auth: {
+    username: keys.volunteerHubUsername,
+    password: keys.volunteerHubPassword
+  }
+};
+
+module.exports = { processUser, requestOptions };
