@@ -18,13 +18,13 @@ class HomePage extends React.Component {
             <h1 style={{ textAlign: "center" }}>Code for Denver Integration</h1>
           </Grid>
           <Grid item>
-            <img style={style.img} src={HabitatForHumanity} />
+            <img style={style.img} src={HabitatForHumanity} alt = "Habitat for Humanity logo" />
           </Grid>
           <Grid item>
             <Cross style={{ fontSize: 44, margin: "10px" }} />
           </Grid>
           <Grid item>
-            <img style={style.img} src={VolunteerHubLogo} />
+            <img style={style.img} src={VolunteerHubLogo} alt = "Volunteer Hub Logo" />
           </Grid>
         </Grid>
       </div>

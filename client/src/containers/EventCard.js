@@ -21,7 +21,6 @@ const checkUserGroup = (event, group, userGroup) => {
   const {UserGroupUid} = group;
   const userGroupDetail = userGroup[UserGroupUid];
   const userCount = group.UserRegistrations.length;
-  console.log(userCount);
 
   // Add the following to hide groups with 0 reserved slots "&& group.SlotsReserved > 0"
   if (UserGroupUid) {

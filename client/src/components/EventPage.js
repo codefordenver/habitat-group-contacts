@@ -91,7 +91,7 @@ class HomePage extends React.Component {
             <Grid item xs={12}>
 
               <EventList />
-
+              
             </Grid>
           </Grid>
         </div>
