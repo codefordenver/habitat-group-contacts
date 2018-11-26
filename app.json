@@ -16,6 +16,12 @@
     },
     "MONGO_URI": {
       "required": true
+    },
+    "VOLUNTEER_USERNAME": {
+      "required": true
+    },
+    "VOLUNTEER_PASSWORD": {
+      "required": true
     }
   },
   "formation": {
