@@ -53,7 +53,7 @@ class AdminNavigation extends React.Component {
       default:
         return (
           <React.Fragment>
-            <Button variant="contained" color="secondary" href="/admin-events">
+            <Button variant="contained" color="secondary" href="/#/admin-events">
               Events Search Page
             </Button>
           </React.Fragment>
