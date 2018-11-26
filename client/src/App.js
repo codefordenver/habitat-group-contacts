@@ -41,7 +41,7 @@ class App extends Component {
                     path="/event/:url_stub"
                     component={UserGroupPage}
                   />
-                  {/* <Route component={NoMatch} / */}>
+                  {/* <Route component={NoMatch} /> */}
                 </Switch>
               </div>
             </Router>
