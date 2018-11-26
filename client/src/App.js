@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
+import AdminPage from "./components/AdminPage";
 import HomePage from "./components/HomePage";
 import EventPage from "./components/EventPage";
-import UserGroupStub from "./components/UserGroupStub";
+import UserGroupPage from "./components/UserGroupPage";
 import NoMatch from "./containers/NoMatch";
 import * as actions from "./actions/index";
 
@@ -34,10 +35,11 @@ class App extends Component {
                 <Header />
                 <Switch>
                   <Route exact path="/" component={HomePage} />
-                  <Route exact path="/events" component={EventPage} />
+                  <Route exact path="/admin-events" component={EventPage} />
+                  <Route exact path="/admin-login" component={AdminPage} />
                   <Route
                     path="/event/:url_stub"
-                    component={UserGroupStub}
+                    component={UserGroupPage}
                   />
                   <Route component={NoMatch} />
                 </Switch>

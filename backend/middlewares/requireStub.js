@@ -9,6 +9,6 @@ module.exports = async (req, res, next) => {
     return res.status(401).send({ error: "You must log in!" });
   }
 
-  console.log("Login by Stub");
+  //console.log("Login by Stub");
   next();
 };

@@ -9,7 +9,7 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 class EventList extends Component {
   componentWillMount() {
     var i = 0;
-    for (i = 0; i < 30; i++) {
+    for (i = 0; i < 60; i++) {
       this.props.fetchUserGroups(i);
     }
   }

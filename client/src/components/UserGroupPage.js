@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import UserDetailHeader from "../containers/UserDetailHeader";
 import UserGroupDetails from "../containers/UserGroupDetails";
 import DownloadExcel from "./DownloadExcel";
+import Typography from "@material-ui/core/Typography";
 
 class UserGroup extends Component {
   componentWillMount() {
@@ -28,37 +29,60 @@ class UserGroup extends Component {
     const userGroupName = userGroupData ? userGroupData.UserGroupName : null;
 
     const paddingStyle = {
-      padding: "0 24px 0 24px"
+      padding: "12px 24px 12px 24px"
     };
 
-    return (
-      <div>
-        <UserGroupDetails
-          eventName={eventName}
-          userGroupName={userGroupName}
-          startTime={eventStart}
-          endTime={eventEnd}
-        />
-        
-        <div style={paddingStyle}>
-          <DownloadExcel userGroupName={userGroupName} startTime={eventStart} />
-          <UserDetailHeader />
+    const loadEventAndUsers = () => {
+      return (
+        <div>
+          <UserGroupDetails
+            eventName={eventName}
+            userGroupName={userGroupName}
+            startTime={eventStart}
+            endTime={eventEnd}
+          />
 
-          <div>
-            {users
-              ? users.map(
-                  user =>
+          <div style={paddingStyle}>
+            <DownloadExcel
+              userGroupName={userGroupName}
+              startTime={eventStart}
+            />
+            <UserDetailHeader />
+
+            <div>
+              {users
+                ? users.map(user =>
                     !user.Deleted ? (
                       <div key={user.UserUid}>
                         <User lookupUser={user} />
                       </div>
                     ) : null
-                )
-              : null}
+                  )
+                : null}
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    };
+
+    const unableToLoadEvent = () => {
+      return (
+        <div>
+          <div style={paddingStyle}>
+            <Typography variant="title" color="inherit">
+              Unable to load event data.
+            </Typography>
+
+            <Typography variant="subheading" color="inherit">
+              Confirm that the url is correct or contact your Habitat for
+              Humanity administrator.
+            </Typography>
+          </div>
+        </div>
+      );
+    };
+
+    return <div>{users ? loadEventAndUsers() : unableToLoadEvent()}</div>;
   }
 }
 

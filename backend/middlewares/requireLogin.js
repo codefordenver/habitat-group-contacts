@@ -3,7 +3,12 @@ module.exports = (req, res, next) => {
     return res.status(401).send({ error: "You must log in!" });
   }
 
-  console.log("Login by Google");
-
-  next();
+  if(req.user.isAdmin){
+    //console.log("User is an Admin");
+    next();
+  } 
+  else {
+    //console.log("User is NOT an Admin");
+    return res.status(401).send({ error: "User is not a site admin" });
+  }
 };

@@ -20,8 +20,23 @@ const style = {
 const checkUserGroup = (event, group, userGroup) => {
   const {UserGroupUid} = group;
   const userGroupDetail = userGroup[UserGroupUid];
-  const userCount = group.UserRegistrations.length;
-  console.log(userCount);
+  const countAllUsers = group.UserRegistrations.length;
+  
+  let countNonDeletedUsers;
+
+  if (countAllUsers > 0 ){
+    const userCountReducer = (accumulator, currentValue) => {
+      if (!currentValue.Deleted){
+        return accumulator += 1;
+      }
+      return accumulator;
+    }
+
+    countNonDeletedUsers = group.UserRegistrations.reduce(userCountReducer, 0);
+  } else {
+
+    countNonDeletedUsers = 0
+  }
 
   // Add the following to hide groups with 0 reserved slots "&& group.SlotsReserved > 0"
   if (UserGroupUid) {
@@ -40,7 +55,7 @@ const checkUserGroup = (event, group, userGroup) => {
           </Grid>
 
           <Grid item xs={12} sm={3}>
-            <Typography>Users: {userCount}</Typography>
+            <Typography>Users: {countNonDeletedUsers}</Typography>
           </Grid>
 
           <Grid item xs={12} sm={3}>
@@ -66,13 +81,6 @@ const loadEvent = (event, userGroup) => {
           {dateFormat(event.StartTime, "start")} {" - "}
           {dateFormat(event.EndTime, "end")}
         </Typography>
-
-        {/* Commented out the description as it is likely not required for admins */}
-
-        {/* <Typography variant="caption"> */}
-        {/* Removing <p> tags https://stackoverflow.com/questions/822452/strip-html-from-text-javascript */}
-        {/* {event.LongDescription.replace(/<(?:.|\n)*?>/gm, "")}
-        </Typography> }*/}
 
         <div style={style.divStyle} />
 
