@@ -4,6 +4,7 @@ export const FETCH_EVENTS = "FETCH_EVENTS";
 export const FETCH_STUB = "FETCH_STUB";
 export const FETCH_USERGROUP = "FETCH_USERGROUP";
 export const FETCH_USERGROUP_DATA = "FETCH_USERGROUP_DATA";
+export const CLEAR_USERGROUP_DATA = "CLEAR_USERGROUP_DATA";
 
 export function fetchEvents(startDate, endDate) {
   const latestTime = endDate ? `&latestTime=${endDate}` : "";
@@ -40,9 +41,14 @@ export function fetchSelectedUserGroupByStub(url_stub) {
   };
 }
 
+export function clearUserGroupData() {
+  return {
+    type: CLEAR_USERGROUP_DATA
+  };
+}
+
 export function fetchUserGroups(page) {
   const url = "/api/volunteer/usergroups";
-
   const request = axios.get(url, { params: { page: page } });
 
   return {

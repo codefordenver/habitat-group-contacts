@@ -21,33 +21,30 @@ class App extends Component {
 
   render() {
     return (
-      <div
-        className="App"
-        style={{
-          backgroundColor: "#fbfbfb",
-          minHeight: "100vh"
-        }}
-      >
-        <Grid container justify="center">
-          <Grid item xs={12} md={10}>
-            <Router>
+      <Router>
+        <div
+          className="App"
+          style={{
+            backgroundColor: "#fbfbfb",
+            minHeight: "100vh"
+          }}
+        >
+          <Grid container justify="center">
+            <Grid item xs={12} md={10}>
               <div>
                 <Header />
                 <Switch>
                   <Route exact path="/" component={HomePage} />
                   <Route exact path="/admin-events" component={EventPage} />
                   <Route exact path="/admin-login" component={AdminPage} />
-                  <Route
-                    path="/event/:url_stub"
-                    component={UserGroupPage}
-                  />
+                  <Route path="/event/:url_stub" component={UserGroupPage} />
                   <Route component={NoMatch} />
                 </Switch>
               </div>
-            </Router>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
+        </div>
+      </Router>
     );
   }
 }
