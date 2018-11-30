@@ -10,7 +10,7 @@ router.route("/events").get((req, res) => {
   url =
     "https://denver.volunteerhub.com/api/v1/events?query=Time&earliestTime=" +
     startDate +
-    latestTime;
+    latestTime + "&pageSize=50";
 
   axios.get(url, requestOptions).then(
     request => {
