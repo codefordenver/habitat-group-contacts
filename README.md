@@ -33,20 +33,26 @@ There is an example file called **ex_dev.js.** Remove the **ex\_** so the file s
 
 ## Google OAuth Setup
 
-1.  Navigate to https://console.developers.google.com/apis?project=stately-vector-204022
+1.  Navigate to https://console.developers.google.com/apis
 2.  On the top bar to the right of the **GoogleAPIs** logo is your project list. Click project list button and make a new project.
-3.  Name the project habit-dev (You can use a different name if you want, just make sure you remember which project it is for)
+3.  Name the project your_project_name-dev (You can use a different name if you want, just make sure you remember which project it is for)
 4.  Wait for ~30 seconds for the project to be generated and then navigate to the project.
 5.  Click "Enable APIs and SERVICES at the top of the dashboard.
 6.  Search for "Google+ API," click "ENABLE" and wait for it to load.
 7.  On the Left Navbar click on Credentials link.
-8.  Click on "OAuth consent screen" and enter a product name such as "Habit-dev." For the dev server the remaining fields can be left blank. Select Save.
+8.  Click on "OAuth consent screen" and enter a product name such as "your_project_name-dev." For the dev server the remaining fields can be left blank. Select Save.
 9.  Click on Credentials again and now click the "Create Credentials" and then select "OAuth Client ID."
 10. Select the "Web Application" radio button. The Name can be left the same but the Restrictions need to be setup as follows:
 
+For **localhost** using the following urls:
 - Authorized JavaScript origins: http://localhost:5000
 - Authorized redirect URIs: http://localhost:5000/api/auth/google/callback and http://localhost:3000/api/auth/google/callback
 - Select Create.
+
+For **PRODUCTION** replace the localhost and port (http://localhost:5000) with the actual site url
+ - Authorized JavaScript origins: https://yoursiteurl.com
+ - Authorized redirect URIs: https://yoursiteurl.com/api/auth/google/callback
+
 
 11. Now the OAuth client ID and secret key should be provided. Add these as a string to their respective fields in the **dev.js** file.
 
@@ -58,8 +64,8 @@ There is an example file called **ex_dev.js.** Remove the **ex\_** so the file s
 1.  Any monogDB instance can be used for this portion. If you are unfamiliar with setting up a mongoDB you can use https://mlab.com to setup an easy development database.
 2.  After making an account you should be on the home page which has two "+ Create New" buttons. Click the top botton which is associated to the "MongoDB Deployments"
 3.  Click any of the three cloud providers (I am using Google Cloud Platform) and then select the "SANDBOX" plan type.
-4.  Select your region and then name your database "habit-dev" and finish submitting the server.
-5.  Once you are back on the home page select the "habit-dev" server you just made and click on the "USERS" tab.
+4.  Select your region and then name your database "your_database_name-dev" and finish submitting the server.
+5.  Once you are back on the home page select the "your_database_name-dev" server you just made and click on the "USERS" tab.
 
 - **Important Note: These are database administrator accounts and not user accounts made through OAuth**
 

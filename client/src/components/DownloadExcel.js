@@ -1,6 +1,5 @@
 import _ from "lodash";
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import Papa from "papaparse";
 import Blob from "blob";
 import moment from "moment";
@@ -8,7 +7,7 @@ import sanitizeFilename from "sanitize-filename";
 import Button from "@material-ui/core/Button";
 
 class DownloadExcel extends Component {
-  render() {
+  render() {    
     const paddingStyle = {
       padding: "0 0 10px 0"
     };
@@ -79,13 +78,4 @@ class DownloadExcel extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    users: state.users
-  };
-}
-
-export default connect(
-  mapStateToProps,
-  null
-)(DownloadExcel);
+export default DownloadExcel;

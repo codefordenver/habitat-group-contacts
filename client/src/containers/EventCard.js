@@ -19,6 +19,7 @@ const style = {
 
 const checkUserGroup = (event, group, userGroup) => {
   const {UserGroupUid} = group;
+
   const userGroupDetail = userGroup[UserGroupUid];
   const countAllUsers = group.UserRegistrations.length;
   
@@ -39,7 +40,7 @@ const checkUserGroup = (event, group, userGroup) => {
   }
 
   // Add the following to hide groups with 0 reserved slots "&& group.SlotsReserved > 0"
-  if (UserGroupUid) {
+  if (UserGroupUid && !group.Deleted) {
     return (
       <div key={UserGroupUid} style={style.divStyle}>
         {/* Why is UserGroupUid for first group exist without name or users? */}

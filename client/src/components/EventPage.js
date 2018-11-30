@@ -21,7 +21,6 @@ class HomePage extends React.Component {
     };
 
     this.handleStartChange = this.handleStartChange.bind(this);
-    this.handleEndChange = this.handleEndChange.bind(this);
     this.handleFetchEvent = this.handleFetchEvent.bind(this);
   }
 
@@ -31,19 +30,13 @@ class HomePage extends React.Component {
     });
   }
 
-  handleEndChange(date) {
-    this.setState({
-      endDate: date
-    });
-  }
-
   handleFetchEvent() {
     //Add error handling of dates are null
     const momentStartDate = this.state.startDate
       ? moment(this.state.startDate.startOf("day")).format()
       : null;
-    const momentEndDate = this.state.endDate
-      ? moment(this.state.endDate.endOf("day")).format()
+    const momentEndDate = this.state.startDate
+      ? moment(this.state.startDate.endOf("day")).format()
       : null;
 
     if (momentStartDate) {
@@ -71,14 +64,6 @@ class HomePage extends React.Component {
               />
             </Grid>
             <Grid item xs={12} sm={3}>
-              <Typography>End Date (Can be left blank)</Typography>
-              <DatePicker
-                selected={this.state.endDate}
-                onChange={this.handleEndChange}
-                popperPlacement="top"
-              />
-            </Grid>
-            <Grid item xs={12} sm={3}>
               <Button
                 variant="contained"
                 size="small"
@@ -88,6 +73,8 @@ class HomePage extends React.Component {
                 Find Events
               </Button>
             </Grid>
+            <Grid item xs={12} sm={3} />
+            <Grid item xs={12} sm={3} />
             <Grid item xs={12}>
 
               <EventList />

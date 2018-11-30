@@ -1,29 +1,48 @@
 import React, { Component } from "react";
 import User from "./User";
 import { connect } from "react-redux";
-import { fetchSelectedUserGroupByStub } from "../actions/fetchEvents";
+import {
+  fetchSelectedUserGroupByStub,
+  clearUserGroupData
+} from "../actions/fetchEvents";
 import { clearUsers } from "../actions/fetchUser";
 import { bindActionCreators } from "redux";
 import UserDetailHeader from "../containers/UserDetailHeader";
 import UserGroupDetails from "../containers/UserGroupDetails";
 import DownloadExcel from "./DownloadExcel";
 import Typography from "@material-ui/core/Typography";
+import { withRouter } from "react-router";
 
 class UserGroup extends Component {
-  componentWillMount() {
-    // Clear the user list when changing user groups as the download excel is pulling from the Redux Store
-    this.props.clearUsers();
+  state = {
+    prevLocation: null
+  };
 
-    this.props.fetchSelectedUserGroupByStub(this.props.match.params.url_stub);
+  static getDerivedStateFromProps(props, state) {
+    if (props.location !== state.prevLocation) {
+      props.clearUsers();
+      props.clearUserGroupData();
+      props.fetchSelectedUserGroupByStub(props.match.params.url_stub);
+      return {
+        prevLocation: props.location
+      };
+    }
+    return null;
   }
 
   render() {
-    const { userGroupData } = this.props;
+    let eventName = null;
+    let eventStart = null;
+    let eventEnd = null;
+    let users = null;
+    let userGroupData = null;
 
-    const eventName = userGroupData ? userGroupData.Name : "Loading...";
-    const eventStart = userGroupData ? userGroupData.StartTime : "Loading...";
-    const eventEnd = userGroupData ? userGroupData.EndTime : "Loading...";
-    const users = userGroupData.Registrations;
+    userGroupData = this.props.userGroupData;
+
+    eventName = userGroupData ? userGroupData.Name : "Loading...";
+    eventStart = userGroupData ? userGroupData.StartTime : "Loading...";
+    eventEnd = userGroupData ? userGroupData.EndTime : "Loading...";
+    users = userGroupData.Registrations;
 
     //Need User GroupName
     const userGroupName = userGroupData ? userGroupData.UserGroupName : null;
@@ -32,7 +51,7 @@ class UserGroup extends Component {
       padding: "12px 24px 12px 24px"
     };
 
-    const loadEventAndUsers = () => {
+    const loadEventAndUsers = users => {
       return (
         <div>
           <UserGroupDetails
@@ -44,9 +63,12 @@ class UserGroup extends Component {
 
           <div style={paddingStyle}>
             <DownloadExcel
+              key={this.props.match.params.url_stub}
               userGroupName={userGroupName}
               startTime={eventStart}
+              users={this.props.users}
             />
+
             <UserDetailHeader />
 
             <div>
@@ -82,24 +104,27 @@ class UserGroup extends Component {
       );
     };
 
-    return <div>{users ? loadEventAndUsers() : unableToLoadEvent()}</div>;
+    return <div> {users ? loadEventAndUsers(users) : unableToLoadEvent()}</div>;
   }
 }
 
 function mapStateToProps(state, ownProps) {
   return {
-    userGroupData: state.userGroupData
+    userGroupData: state.userGroupData,
+    users: state.users
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { fetchSelectedUserGroupByStub, clearUsers },
+    { clearUsers, fetchSelectedUserGroupByStub, clearUserGroupData },
     dispatch
   );
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UserGroup);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(UserGroup)
+);

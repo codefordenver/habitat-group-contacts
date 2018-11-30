@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import EventCard from "../containers/EventCard";
 import { connect } from "react-redux";
-import { fetchEvents, fetchUserGroups } from "../actions/fetchEvents";
+import { fetchEvents, fetchUserGroups, clearUserGroupData } from "../actions/fetchEvents";
+import { clearUsers } from "../actions/fetchUser";
 import { bindActionCreators } from "redux";
 import _ from "lodash";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 class EventList extends Component {
   componentWillMount() {
+    this.props.clearUsers();
+    this.props.clearUserGroupData();
+    
     var i = 0;
     for (i = 0; i < 60; i++) {
       this.props.fetchUserGroups(i);
@@ -41,7 +45,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchEvents, fetchUserGroups }, dispatch);
+  return bindActionCreators({ fetchEvents, fetchUserGroups, clearUsers, clearUserGroupData }, dispatch);
 }
 
 export default connect(
