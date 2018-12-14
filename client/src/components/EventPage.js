@@ -97,7 +97,7 @@ class HomePage extends React.Component {
           </Grid>
         ) : (
           <Typography color="error" align="center">
-            {<ErrorIndicator text={error} />}
+            {<ErrorIndicator>{error}</ErrorIndicator>}
           </Typography>
         )}
       </div>

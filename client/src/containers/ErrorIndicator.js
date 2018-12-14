@@ -23,7 +23,7 @@ class ErrorIndicator extends React.PureComponent {
 
   render() {
     if (this.state.isShown) {
-      return this.props.text;
+      return this.props.children;
     }
     return null;
   }

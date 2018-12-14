@@ -11,6 +11,7 @@ import UserDetailHeader from "../containers/UserDetailHeader";
 import UserGroupDetails from "../containers/UserGroupDetails";
 import DownloadExcel from "./DownloadExcel";
 import Typography from "@material-ui/core/Typography";
+import ErrorIndicator from "../containers/ErrorIndicator";
 import { withRouter } from "react-router";
 
 class UserGroup extends Component {
@@ -90,16 +91,18 @@ class UserGroup extends Component {
     const unableToLoadEvent = () => {
       return (
         <div>
-          <div style={paddingStyle}>
-            <Typography variant="title" color="inherit">
-              Unable to load event data.
-            </Typography>
+          <ErrorIndicator>
+            <div style={paddingStyle}>
+              <Typography variant="title" color="inherit">
+                Unable to load event data.
+              </Typography>
 
-            <Typography variant="subheading" color="inherit">
-              Confirm that the url is correct or contact your Habitat for
-              Humanity administrator.
-            </Typography>
-          </div>
+              <Typography variant="subheading" color="inherit">
+                Confirm that the url is correct or contact your Habitat for
+                Humanity administrator.
+              </Typography>
+            </div>
+          </ErrorIndicator>
         </div>
       );
     };
