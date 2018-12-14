@@ -1,6 +1,8 @@
 import React from "react";
+
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 const styles = {
   root: {
@@ -9,14 +11,18 @@ const styles = {
   flex: {
     flexGrow: 1
   },
-  button: {
+  div: {
     margin: "10px"
+  },
+  error: {
+    textColor:"red"
   }
 };
 
 class AdminNavigation extends React.Component {
-  renderContent() {
-    //console.log(this.props.auth);
+  renderUserSettings() {
+    const { classes } = this.props;
+
     switch (this.props.auth) {
       case null:
         return;
@@ -24,7 +30,12 @@ class AdminNavigation extends React.Component {
       case false:
         return (
           <React.Fragment>
-            <Button variant="contained" color="contain" href="/api/auth/google">
+            <Button
+              className={classes.div}
+              variant="contained"
+              color="secondary"
+              href="/api/auth/google"
+            >
               Login With Google
             </Button>
           </React.Fragment>
@@ -33,41 +44,50 @@ class AdminNavigation extends React.Component {
       default:
         return (
           <React.Fragment>
-            <Button variant="contained" color="inherit" href="/api/auth/logout">
-              Logout
-            </Button>
-          </React.Fragment>
-        );
-    }
-  }
+            <div className={classes.div}>
+              <Typography variant="title">
+                You are logged in as: {this.props.auth.googleEmail}
+              </Typography>
+            </div>
 
-  renderLinks() {
-    //console.log(this.props.auth);
-    switch (this.props.auth) {
-      case null:
-        return;
+            <div className={classes.div}>
+              {this.props.auth.isAdmin ? (
+                <div>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    href="/#/admin-events"
+                  >
+                    Events Search Page
+                  </Button>
+                </div>
+              ) : (
+                <div>
+                  <Typography color="error">
+                    Your account is not setup to search events.  Request access from your administrator.
+                  </Typography>
+                </div>
+              )}
+            </div>
 
-      case false:
-        return;
-
-      default:
-        return (
-          <React.Fragment>
-            <Button variant="contained" color="secondary" href="/#/admin-events">
-              Events Search Page
-            </Button>
+            <div className={classes.div}>
+              <Button
+                variant="contained"
+                color="inherit"
+                href="/api/auth/logout"
+              >
+                Logout
+              </Button>
+            </div>
           </React.Fragment>
         );
     }
   }
 
   render() {
-    const { classes } = this.props;
-
     return (
       <div>
-        <div className={classes.button}> {this.renderLinks()}</div>
-        <div className={classes.button}> {this.renderContent()}</div>
+        <div>{this.renderUserSettings()}</div>
       </div>
     );
   }

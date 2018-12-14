@@ -9,6 +9,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 import EventList from "./EventList";
+import ErrorIndicator from "../containers/ErrorIndicator";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -52,8 +53,23 @@ class HomePage extends React.Component {
       }
     };
 
+    const authCheck = (auth) => {
+      if(!auth){
+        return "Error Code 1: You must login to search events"
+      }
+
+      if(!auth.isAdmin){
+        return "Error Code 2: You must have administrator access to search for events"
+      }
+      
+      return null
+    }
+
+    const error = authCheck(this.props.auth);
+
     return (
-        <div style={style.divStyle}>
+      <div style={style.divStyle}>
+        {! error ? (
           <Grid container alignItems="center">
             <Grid item xs={12} sm={3}>
               <Typography>Start Date (Required)</Typography>
@@ -76,14 +92,23 @@ class HomePage extends React.Component {
             <Grid item xs={12} sm={3} />
             <Grid item xs={12} sm={3} />
             <Grid item xs={12}>
-
               <EventList />
-              
             </Grid>
           </Grid>
-        </div>
+        ) : (
+          <Typography color="error" align="center">
+            {<ErrorIndicator text={error} />}
+          </Typography>
+        )}
+      </div>
     );
   }
+}
+
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -91,6 +116,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(HomePage);
