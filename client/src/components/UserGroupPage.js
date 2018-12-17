@@ -5,13 +5,18 @@ import {
   fetchSelectedUserGroupByStub,
   clearUserGroupData
 } from "../actions/fetchEvents";
+import {
+  usergroupFetchingSelector,
+  usergroupDataSelector,
+  usergroupErrorSelector
+} from "../reducers/reducerUserGroupSelected";
 import { clearUsers } from "../actions/fetchUser";
 import { bindActionCreators } from "redux";
 import UserDetailHeader from "../containers/UserDetailHeader";
 import UserGroupDetails from "../containers/UserGroupDetails";
 import DownloadExcel from "./DownloadExcel";
 import Typography from "@material-ui/core/Typography";
-import ErrorIndicator from "../containers/ErrorIndicator";
+import LoadingIndicator from "../containers/LoadingIndicator";
 import { withRouter } from "react-router";
 
 class UserGroup extends Component {
@@ -43,7 +48,7 @@ class UserGroup extends Component {
     eventName = userGroupData ? userGroupData.Name : "Loading...";
     eventStart = userGroupData ? userGroupData.StartTime : "Loading...";
     eventEnd = userGroupData ? userGroupData.EndTime : "Loading...";
-    users = userGroupData.Registrations;
+    users = userGroupData ? userGroupData.Registrations : "Loading...";
 
     //Need User GroupName
     const userGroupName = userGroupData ? userGroupData.UserGroupName : null;
@@ -88,32 +93,47 @@ class UserGroup extends Component {
       );
     };
 
-    const unableToLoadEvent = () => {
+    const unableToLoadEvent = error => {
       return (
         <div>
-          <ErrorIndicator>
-            <div style={paddingStyle}>
-              <Typography variant="title" color="inherit">
-                Unable to load event data.
-              </Typography>
+          <div style={paddingStyle}>
+            <Typography variant="title" color="error">
+              {error}
+            </Typography>
 
-              <Typography variant="subheading" color="inherit">
-                Confirm that the url is correct or contact your Habitat for
-                Humanity administrator.
-              </Typography>
-            </div>
-          </ErrorIndicator>
+            <Typography variant="subheading" color="error">
+              Confirm that the url is correct or contact your Habitat for
+              Humanity administrator.
+            </Typography>
+          </div>
         </div>
       );
     };
 
-    return <div> {users ? loadEventAndUsers(users) : unableToLoadEvent()}</div>;
+    const loadingIndicator = () => {
+      return (
+        <div style = {{textAlign: "center", padding:"20px"}}>
+          <LoadingIndicator color="primary" />
+        </div>
+      );
+    };
+
+    return (
+      <div>
+        {this.props.userGroupFetching && loadingIndicator()}
+        {this.props.userGroupError &&
+          unableToLoadEvent(this.props.userGroupError)}
+        {this.props.userGroupData && loadEventAndUsers(users)}
+      </div>
+    );
   }
 }
 
 function mapStateToProps(state, ownProps) {
   return {
-    userGroupData: state.userGroupData,
+    userGroupData: usergroupDataSelector(state.userGroupData),
+    userGroupFetching: usergroupFetchingSelector(state.userGroupData),
+    userGroupError: usergroupErrorSelector(state.userGroupData),
     users: state.users
   };
 }

@@ -22,9 +22,8 @@ const styles = {
 class AdminNavigation extends React.Component {
   renderUserSettings() {
     const { classes } = this.props;
-
     switch (this.props.auth) {
-      case null:
+      case null || undefined:
         return;
 
       case false:

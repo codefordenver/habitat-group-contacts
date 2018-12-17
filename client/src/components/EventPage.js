@@ -3,13 +3,14 @@ import DatePicker from "react-datepicker";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchEvents } from "../actions/fetchEvents";
+import { fetchingUserSelector, userSelector } from "../reducers/reducerAuth";
 import moment from "moment";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 import EventList from "./EventList";
-import ErrorIndicator from "../containers/ErrorIndicator";
+import LoadingIndicator from "../containers/LoadingIndicator";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -45,6 +46,36 @@ class HomePage extends React.Component {
     }
   }
 
+  searchEvents() {
+    return (
+      <Grid container alignItems="center">
+        <Grid item xs={12} sm={3}>
+          <Typography>Start Date (Required)</Typography>
+          <DatePicker
+            selected={this.state.startDate}
+            onChange={this.handleStartChange}
+            popperPlacement="top"
+          />
+        </Grid>
+        <Grid item xs={12} sm={3}>
+          <Button
+            variant="contained"
+            size="small"
+            color="secondary"
+            onClick={this.handleFetchEvent}
+          >
+            Find Events
+          </Button>
+        </Grid>
+        <Grid item xs={12} sm={3} />
+        <Grid item xs={12} sm={3} />
+        <Grid item xs={12}>
+          <EventList />
+        </Grid>
+      </Grid>
+    );
+  }
+
   render() {
     const style = {
       divStyle: {
@@ -53,53 +84,31 @@ class HomePage extends React.Component {
       }
     };
 
-    const authCheck = (auth) => {
-      if(!auth){
-        return "Error Code 1: You must login to search events"
+    const authCheck = auth => {
+      if (!auth) {
+        return (
+          <Typography color="error" align="center">
+            Error Code 1: You must login to search events
+          </Typography>
+        );
       }
 
-      if(!auth.isAdmin){
-        return "Error Code 2: You must have administrator access to search for events"
+      if (!auth.isAdmin) {
+        return (
+          <Typography color="error" align="center">
+            Error Code 2: You must have administrator access to search for
+            events
+          </Typography>
+        );
       }
-      
-      return null
-    }
 
-    const error = authCheck(this.props.auth);
+      return this.searchEvents();
+    };
 
     return (
       <div style={style.divStyle}>
-        {! error ? (
-          <Grid container alignItems="center">
-            <Grid item xs={12} sm={3}>
-              <Typography>Start Date (Required)</Typography>
-              <DatePicker
-                selected={this.state.startDate}
-                onChange={this.handleStartChange}
-                popperPlacement="top"
-              />
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <Button
-                variant="contained"
-                size="small"
-                color="secondary"
-                onClick={this.handleFetchEvent}
-              >
-                Find Events
-              </Button>
-            </Grid>
-            <Grid item xs={12} sm={3} />
-            <Grid item xs={12} sm={3} />
-            <Grid item xs={12}>
-              <EventList />
-            </Grid>
-          </Grid>
-        ) : (
-          <Typography color="error" align="center">
-            {<ErrorIndicator>{error}</ErrorIndicator>}
-          </Typography>
-        )}
+        {this.props.fetchingUser && <LoadingIndicator color="primary" />}
+        {!this.props.fetchingUser && authCheck(this.props.auth)}
       </div>
     );
   }
@@ -107,7 +116,8 @@ class HomePage extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth
+    auth: userSelector(state.auth),
+    fetchingUser: fetchingUserSelector(state.auth)
   };
 }
 

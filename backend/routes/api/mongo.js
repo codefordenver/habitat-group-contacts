@@ -63,7 +63,7 @@ router.route("/usergroup").get(async (req, res) => {
 
     res.send(returned_event);
   } else {
-    res.send(null);
+    res.status(404).send({error: "The requested event does not exist"});
   }
 });
 

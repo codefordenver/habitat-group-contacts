@@ -22,6 +22,9 @@
     "redux-thunk": "^2.3.0",
     "sanitize-filename": "^1.6.1"
   },
+  "devDependencies": {
+    "http-proxy-middleware": "^0.19.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
