@@ -18,7 +18,7 @@ export default function(state = {}, action) {
       };
 
     case FETCH_EVENTS_ERROR:
-      return { fetching: false, error: action.payload.response.data.error };
+      return { fetching: false, error: action.payload };
       
     default:
       return state;

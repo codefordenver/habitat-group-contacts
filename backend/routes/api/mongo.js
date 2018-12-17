@@ -20,7 +20,6 @@ router.route("/stub").get(async (req, res) => {
 //GET USERGROUP DATA BY MONGO LOOKUP
 router.route("/usergroup").get(async (req, res) => {
   const url_stub = req.query.url_stub;
-  console.log("Requested Stub");
 
   const getStubData = async url_stub => {
     try {

@@ -34,7 +34,7 @@ export function fetchEvents(startDate, endDate) {
       .catch(e => {
         dispatch({
           type: FETCH_EVENTS_ERROR,
-          payload: e
+          payload: "Error fetching events from the server"
         });
       });
   };

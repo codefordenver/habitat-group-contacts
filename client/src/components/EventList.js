@@ -52,8 +52,8 @@ class EventList extends Component {
         {this.props.events && this.renderEvents(this.props.events)}
         {this.props.eventsError && (
           <div>
-            An error was encountered
-            {this.props.eventsError}
+            <p>An error occured:</p>
+            <p>{this.props.eventsError}</p>
           </div>
         )}
       </React.Fragment>
