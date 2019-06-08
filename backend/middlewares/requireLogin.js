@@ -1,6 +1,6 @@
 module.exports = (req, res, next) => {
   if (!req.user) {
-    return res.status(401).send({ error: "You must log in!" });
+    return res.status(401).send({ error: "You are not currently logged in." });
   }
 
   if(req.user.isAdmin){
@@ -9,6 +9,6 @@ module.exports = (req, res, next) => {
   } 
   else {
     //console.log("User is NOT an Admin");
-    return res.status(401).send({ error: "User is not a site admin" });
+    return res.status(401).send({ error: "You do not have permission to view this page.  Contact your administrator for elevated access." });
   }
 };

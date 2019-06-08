@@ -6,7 +6,7 @@ module.exports = async (req, res, next) => {
   const usergroupStub = await stub.getStub(eventUID, usergroupUID);
 
   if (!usergroupStub) {
-    return res.status(401).send({ error: "You must log in!" });
+    return res.status(401).send({ error: "The event page you have requested does not exist." });
   }
 
   //console.log("Login by Stub");

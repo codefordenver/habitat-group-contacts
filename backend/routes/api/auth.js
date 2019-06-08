@@ -10,12 +10,12 @@ router.route("/google").get(
 router
   .route("/google/callback")
   .get(passport.authenticate("google"), (req, res) => {
-    res.redirect("/#/admin-events");
+    res.redirect("/#/admin-login");
   });
 
 router.route("/logout").get((req, res) => {
   req.logout();
-  res.redirect("/");
+  res.redirect("/#/");
 });
 
 router.route("/current_user").get((req, res) => {
