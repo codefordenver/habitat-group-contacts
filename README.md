@@ -67,7 +67,7 @@ For **PRODUCTION** replace the localhost and port (http://localhost:5000) with t
 4.  Select your region and then name your database "your_database_name-dev" and finish submitting the server.
 5.  Once you are back on the home page select the "your_database_name-dev" server you just made and click on the "USERS" tab.
 
-- **Important Note: These are database administrator accounts and not user accounts made through OAuth**
+> :warning: **Important Note: These are database administrator accounts and not user accounts made through OAuth**
 
 6.  Click on "Add database user" and make a user account.
 7.  Copy the mongodb:// url under the "To connect using a driver via the standard MongoDB URI (what's this?):" and add it to the following key in the **dev.js** file.
