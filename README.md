@@ -80,7 +80,3 @@ For **PRODUCTION** replace the localhost and port (http://localhost:5000) with t
 1.  For a local dev you can enter any random string similar to a password. For production you can use a more secure random number/password generator.
 
 - cookieKey: 'Place cookieKey Here'
-
-### Waffle Link
-
-This repo was created from https://cfd-new.herokuapp.com. Use [the Waffle board](https://waffle.io/codefordenver/habitat-group-contacts) for this repo to always know what to do next for your project!
